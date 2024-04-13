@@ -5,6 +5,6 @@ from rest_framework import generics
 
 class Information (serializers.ModelSerializer) :
     class Meta:
-        model = models
+        model = models.Information
         fields = '__all__' 
 
