@@ -14,7 +14,7 @@ class Information (models.Model) :
     Theme = models.IntegerField ()
     instagram = models.CharField (max_length=255)
     telegram =models.CharField (max_length=255)
-    tweeter = models.IntegerField ()
+    tweeter = models.CharField (max_length=255)
     Cataloge = models.CharField (max_length=255)
     Description = models.CharField (max_length=500)
     Keywords = models.CharField (max_length=500)
@@ -50,7 +50,7 @@ class ContactUs (models.Model) :
     Name = models.CharField (max_length=255)
     Email = models.CharField (max_length=200)
     Phonenumber = models.CharField (max_length=12)
-    # Subject = ListField ()
+    Subject = models.CharField (max_length=200)
     Message = models.CharField (max_length=1000)
     Domain = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
@@ -67,7 +67,7 @@ class Grouping (models.Model) :
     Icone = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     Url = models.CharField (max_length=255)
-    # Status = BooleanField ()
+
 
 
 #History
@@ -80,7 +80,6 @@ class HistoryOfCompanies (models.Model) :
     Video = models.CharField (max_length=255) 
     Domain = models.CharField (max_length=255)
     Icon = models.CharField (max_length=255)
-    # Status = BooleanField ()
 
 
 #Introduction
@@ -114,7 +113,7 @@ class News (models.Model) :
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
     Picture = models.CharField (max_length=255)
-    # Status = BooleanField ()
+
 
 
 #Products
@@ -125,7 +124,7 @@ class Products (models.Model) :
     Paragraph = models.CharField (max_length=1000)
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
-    # Status = BooleanField ()
+
 
 
 #Questions
@@ -153,7 +152,6 @@ class RelatedLinks (models.Model) :
     Domain = models.CharField (max_length=255)
     Link = models.CharField (max_length=255)
     Title = models.CharField (max_length=300)
-    # Status = BooleanField ()
    
 
    
