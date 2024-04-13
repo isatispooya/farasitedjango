@@ -12,8 +12,8 @@ class Information (models.Model) :
     NationalID = models.CharField (max_length=12)
     AboutUs = models.CharField (max_length=700)
     Theme = models.IntegerField ()
-    instagram = models.IntegerField ()
-    telegram = models.IntegerField ()
+    instagram = models.CharField (max_length=255)
+    telegram =models.CharField (max_length=255)
     tweeter = models.IntegerField ()
     Cataloge = models.CharField (max_length=255)
     Description = models.CharField (max_length=500)
@@ -23,7 +23,7 @@ class Information (models.Model) :
     FieldOfActivity = models.CharField (max_length=255)
 
 
-# Branchs
+#Branchs
 class BranchesOfCompany (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
@@ -45,20 +45,20 @@ class BusinessPartners (models.Model) :
 
 
 
-# Contact Us
+#Contact Us
 class ContactUs (models.Model) :
     Name = models.CharField (max_length=255)
-    Email = models.CharField (max_length=255)
-    Phonenumber = models.CharField (max_length=255)
+    Email = models.CharField (max_length=200)
+    Phonenumber = models.CharField (max_length=12)
     # Subject = ListField ()
-    Message = models.CharField (max_length=255)
+    Message = models.CharField (max_length=1000)
     Domain = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     CreateAt = models.DateTimeField()
 
 
 
-# Email
+#Email
 class Email (models.Model) :
     Domain =  models.CharField (max_length=255)
     CreateAt = models.DateTimeField()
@@ -75,4 +75,138 @@ class Grouping (models.Model) :
     route = models.CharField (max_length=255)
     Url = models.CharField (max_length=255)
     # Status = BooleanField ()
+
+
+#History
+class HistoryOfCompanies (models.Model) :
+    CreateAt = models.DateTimeField()
+    Date = models.CharField (max_length=12)
+    Title = models.CharField (max_length=255)
+    Paragraph = models.CharField (max_length=700)
+    Picture = models.CharField (max_length=255) 
+    Video = models.CharField (max_length=255) 
+    Domain = models.CharField (max_length=255)
+    Icon = models.CharField (max_length=255)
+    # Status = BooleanField ()
+
+
+#Introduction
+class IntroductionOfCompanies (models.Model) :
+    Logo =models.CharField (max_length=255)
+    Name =models.CharField (max_length=255)
+    Link =models.CharField (max_length=255)
+    Telephone = models.CharField (max_length=12)
+    Address = models.CharField (max_length=500)
+    ShortAboutUs = models.CharField (max_length=700)
+    LongAboutUs = models.CharField (max_length=1500)
+    Picture = models.CharField (max_length=255)
+    instagram = models.CharField (max_length=255)
+    telegram =models.CharField (max_length=255)
+    Size = models.IntegerField ()
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+
+
+
+
+#News
+class News (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    Content = models.CharField (max_length=10000)
+    KeyWord = models.CharField (max_length=500)
+    Grouping = models.CharField (max_length=255)
+    Title = models.CharField (max_length=500)
+    TypeOfContent = models.CharField (max_length=255)
+    ShortDescription = models.CharField (max_length=700)
+    route = models.CharField (max_length=255)
+    Picture = models.CharField (max_length=255)
+    # Status = BooleanField ()
+
+
+#Products
+class Products (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    Picture =models.CharField (max_length=255)
+    Paragraph = models.CharField (max_length=1000)
+    Title = models.CharField (max_length=255)
+    route = models.CharField (max_length=255)
+    # Status = BooleanField ()
+
+
+#Questions
+class Questions (models.Model) :
+    Question = models.CharField (max_length=500)
+    Answer = models.CharField (max_length=1000)
+    Domain = models.CharField (max_length=255)
+    CreateAt = models.DateTimeField()
+
+
+#QuickAccess 
+class QuickAccess (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    Url = models.CharField (max_length=255)
+    Picture = models.CharField (max_length=255)
+    Title = models.CharField (max_length=500)
+
+
+#ReceiveEmail
+class ReceiveEmail (models.Model) :
+    Domain = models.CharField (max_length=255)
+    Receiver = models.CharField (max_length=255)
+    Sender = models.CharField (max_length=255)
+    Body = models.CharField (max_length=10000)
+    Subject = models.CharField (max_length=300)
+    CreateAt = models.DateTimeField()
+
+
+#RelatedLinks
+class RelatedLinks (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    Link = models.CharField (max_length=255)
+    Title = models.CharField (max_length=300)
+    # Status = BooleanField ()
+   
+
+#SendEmail
+class SendEmail(models.Model):
+    Domain = models.CharField (max_length=300)
+    CreateAt = models.DateTimeField()
+    Recipient = models.CharField (max_length=300)
+    Subject = models.CharField (max_length=300)
+    Body = models.CharField (max_length=10000)
+    SenderEmail = models.CharField (max_length=300)
+
+    
+
+#Slider
+class Slider (models.Model) :
+    Picture = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300)
+    Alt = models.CharField (max_length=300)
+    Domain = models.CharField (max_length=300)
+    CreateAt = models.DateTimeField()
+    # Status = BooleanField ()
+
+
+#Statics
+class Statistics (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300)
+    Number = models.CharField (max_length=300)
+    Icon = models.CharField (max_length=300)
+    # Status = BooleanField ()
+
+
+#TypeOfContent
+class TypeOfContent (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300)
+    # Status = BooleanField ()
+
 
