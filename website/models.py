@@ -40,7 +40,7 @@ class BusinessPartners (models.Model) :
     CreateAt = models.DateTimeField()
     Domain =  models.CharField (max_length=255)
     Name =  models.CharField (max_length=255)
-    Logo =  models.CharField (max_length=255)
+    Logo =  models.CharField (upload_to='static/images/')
     Link =  models.CharField (max_length=255)
 
 
@@ -48,8 +48,8 @@ class BusinessPartners (models.Model) :
 #Contact Us
 class ContactUs (models.Model) :
     Name = models.CharField (max_length=255)
-    Email = models.CharField (max_length=200)
-    Phonenumber = models.CharField (max_length=12)
+    Email = models.CharField (max_length=200,blank=True, null=True)
+    Phonenumber = models.CharField (max_length=12,blank=True, null=True)
     Subject = models.CharField (max_length=200)
     Message = models.CharField (max_length=1000)
     Domain = models.CharField (max_length=255)
@@ -64,8 +64,7 @@ class Grouping (models.Model) :
     CreateAt = models.DateTimeField()
     Domain =  models.CharField (max_length=255)
     Title = models.CharField (max_length=255)
-    Icone = models.CharField (max_length=255)
-    route = models.CharField (max_length=255)
+    Icone = models.CharField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
 
 
@@ -76,24 +75,24 @@ class HistoryOfCompanies (models.Model) :
     Date = models.CharField (max_length=12)
     Title = models.CharField (max_length=255)
     Paragraph = models.CharField (max_length=700)
-    Picture = models.CharField (max_length=255) 
-    Video = models.CharField (max_length=255) 
+    Picture = models.CharField (upload_to='static/images/') 
+    Video = models.CharField (upload_to='static/images/') 
     Domain = models.CharField (max_length=255)
-    Icon = models.CharField (max_length=255)
+    Icon = models.CharField (upload_to='static/images/')
 
 
 #IntroductionOfCompanies
 class IntroductionOfCompanies (models.Model) :
-    Logo =models.CharField (max_length=255)
+    Logo =models.CharField (upload_to='static/images/')
     Name =models.CharField (max_length=255)
     Link =models.CharField (max_length=255)
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
     ShortAboutUs = models.CharField (max_length=700)
     LongAboutUs = models.CharField (max_length=1500)
-    Picture = models.CharField (max_length=255)
-    instagram = models.CharField (max_length=255)
-    telegram =models.CharField (max_length=255)
+    Picture = models.CharField (upload_to='static/images/')
+    instagram = models.CharField (max_length=255,blank=True, null=True)
+    telegram =models.CharField (max_length=255,blank=True, null=True)
     Size = models.IntegerField ()
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
@@ -112,7 +111,7 @@ class News (models.Model) :
     TypeOfContent = models.CharField (max_length=255)
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
-    Picture = models.CharField (max_length=255)
+    Picture = models.CharField (upload_to='static/images/')
 
 
 
@@ -120,7 +119,7 @@ class News (models.Model) :
 class Products (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Picture =models.CharField (max_length=255)
+    Picture =models.CharField (upload_to='static/images/')
     Paragraph = models.CharField (max_length=1000)
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
@@ -140,7 +139,7 @@ class QuickAccess (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     Url = models.CharField (max_length=255)
-    Picture = models.CharField (max_length=255)
+    Picture = models.CharField (upload_to='static/images/')
     Title = models.CharField (max_length=500)
 
 
@@ -158,7 +157,7 @@ class RelatedLinks (models.Model) :
 
 #Slider
 class Slider (models.Model) :
-    Picture = models.CharField (max_length=300)
+    Picture = models.CharField (upload_to='static/images/')
     Title = models.CharField (max_length=300)
     Alt = models.CharField (max_length=300)
     Domain = models.CharField (max_length=300)
@@ -172,7 +171,7 @@ class Statistics (models.Model) :
     Domain = models.CharField (max_length=300)
     Title = models.CharField (max_length=300)
     Number = models.CharField (max_length=300)
-    Icon = models.CharField (max_length=300)
+    Icon = models.CharField (upload_to='static/images/')
     # Status = BooleanField ()
 
 
