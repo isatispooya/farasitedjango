@@ -1,7 +1,17 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from rest_framework import serializers
+from rest_framework import viewsets
+from . import models
+from . import serializer
 
 # Create your views here.
-def SetUpInformation(request):
-    return HttpResponse('111')
+class SetUpInformation(viewsets.ModelViewSet):
+    queryset = models.Information.objects.all()
+    serializer_class = serializer.Information
+    def get(self, request):
+        domin = request.query_params.get('Domin')
+        if domin is None:
+            raise serializers.ValidationError('Parameter "domin" is required.')
+
+        return models.objects.filter(Domin=domin).last()
+
