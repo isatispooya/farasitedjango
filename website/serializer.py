@@ -8,3 +8,8 @@ class Information (serializers.ModelSerializer) :
         model = models.Information
         fields = '__all__' 
 
+
+class BranchesOfCompany (serializers.ModelSerializer) :
+    class Meta:
+        model = models.BranchesOfCompany
+        fields = '__all__' 
