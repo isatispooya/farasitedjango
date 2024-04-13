@@ -58,13 +58,6 @@ class ContactUs (models.Model) :
 
 
 
-#Email
-class Email (models.Model) :
-    Domain =  models.CharField (max_length=255)
-    CreateAt = models.DateTimeField()
-    SenderEmail =  models.CharField (max_length=255)
-
-
 
 #Grouping 
 class Grouping (models.Model) :
@@ -152,14 +145,6 @@ class QuickAccess (models.Model) :
     Title = models.CharField (max_length=500)
 
 
-#ReceiveEmail
-class ReceiveEmail (models.Model) :
-    Domain = models.CharField (max_length=255)
-    Receiver = models.CharField (max_length=255)
-    Sender = models.CharField (max_length=255)
-    Body = models.CharField (max_length=10000)
-    Subject = models.CharField (max_length=300)
-    CreateAt = models.DateTimeField()
 
 
 #RelatedLinks
@@ -171,16 +156,7 @@ class RelatedLinks (models.Model) :
     # Status = BooleanField ()
    
 
-#SendEmail
-class SendEmail(models.Model):
-    Domain = models.CharField (max_length=300)
-    CreateAt = models.DateTimeField()
-    Recipient = models.CharField (max_length=300)
-    Subject = models.CharField (max_length=300)
-    Body = models.CharField (max_length=10000)
-    SenderEmail = models.CharField (max_length=300)
-
-    
+   
 
 #Slider
 class Slider (models.Model) :
@@ -210,3 +186,30 @@ class TypeOfContent (models.Model) :
     # Status = BooleanField ()
 
 
+
+#Email
+class Email (models.Model) :
+    Domain =  models.CharField (max_length=255)
+    CreateAt = models.DateTimeField()
+    SenderEmail =  models.CharField (max_length=255)
+
+
+#SendEmail
+class SendEmail(models.Model):
+    Domain = models.CharField (max_length=300)
+    CreateAt = models.DateTimeField()
+    Recipient = models.CharField (max_length=300)
+    Subject = models.CharField (max_length=300)
+    Body = models.CharField (max_length=10000)
+    SenderEmail = models.CharField (max_length=300)
+
+ 
+ 
+#ReceiveEmail
+class ReceiveEmail (models.Model) :
+    Domain = models.CharField (max_length=255)
+    Receiver = models.CharField (max_length=255)
+    Sender = models.CharField (max_length=255)
+    Body = models.CharField (max_length=10000)
+    Subject = models.CharField (max_length=300)
+    CreateAt = models.DateTimeField()
