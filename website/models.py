@@ -183,6 +183,24 @@ class TypeOfContent (models.Model) :
     # Status = BooleanField ()
 
 
+#GalleryPhoto
+class GalleryPhoto (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    Picture =models.CharField (upload_to='static/images/')
+    Alt = models.CharField (max_length=255)
+    route = models.CharField (max_length=255)
+
+
+#GalleryVideo
+class GalleryVideo (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    Video =models.CharField (upload_to='static/images/')
+    Alt = models.CharField (max_length=255)
+    route = models.CharField (max_length=255)
+
+
 
 #Email
 class Email (models.Model) :

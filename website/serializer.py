@@ -85,6 +85,20 @@ class TypeOfContent (serializers.ModelSerializer) :
         fields = '__all__' 
 
 
+
+class GalleryVideo (serializers.ModelSerializer) :
+    class Meta:
+        model = models.GalleryVideo
+        fields = '__all__' 
+
+
+
+class GalleryPhoto (serializers.ModelSerializer) :
+    class Meta:
+        model = models.GalleryPhoto
+        fields = '__all__' 
+
+
 class Email (serializers.ModelSerializer) :
     class Meta:
         model = models.Email

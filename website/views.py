@@ -208,6 +208,44 @@ class TypeOfContentViewSet(viewsets.ModelViewSet):
     
     
     
+    
+    
+    
+# GalleryPhoto
+class GalleryPhotoViewSet(viewsets.ModelViewSet):
+    queryset = models.GalleryPhoto.objects.all()
+    serializer_class = serializer.GalleryPhoto
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+    
+    
+    
+    
+# GalleryVideo
+class GalleryVideoViewSet(viewsets.ModelViewSet):
+    queryset = models.GalleryVideo.objects.all()
+    serializer_class = serializer.GalleryVideo
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+    
 # Email
 class EmailViewSet(viewsets.ModelViewSet):
     queryset = models.Email.objects.all()
