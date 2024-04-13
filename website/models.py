@@ -70,7 +70,7 @@ class Grouping (models.Model) :
 
 
 
-#History
+#HistoryOfCompanies
 class HistoryOfCompanies (models.Model) :
     CreateAt = models.DateTimeField()
     Date = models.CharField (max_length=12)
@@ -82,7 +82,7 @@ class HistoryOfCompanies (models.Model) :
     Icon = models.CharField (max_length=255)
 
 
-#Introduction
+#IntroductionOfCompanies
 class IntroductionOfCompanies (models.Model) :
     Logo =models.CharField (max_length=255)
     Name =models.CharField (max_length=255)
@@ -166,7 +166,7 @@ class Slider (models.Model) :
     # Status = BooleanField ()
 
 
-#Statics
+#Statistics
 class Statistics (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=300)

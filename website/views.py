@@ -4,7 +4,7 @@ from rest_framework import response
 from . import models
 from . import serializer
 
-
+# Information 
 class InformationViewSet(viewsets.ModelViewSet):
     queryset = models.Information.objects.all()
     serializer_class = serializer.Information
@@ -16,7 +16,7 @@ class InformationViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_object)
         return response.Response(serializer.data)
 
-
+# BranchesOfCompany
 class BrancheViewSet(viewsets.ModelViewSet):
     queryset = models.BranchesOfCompany.objects.all()
     serializer_class = serializer.BranchesOfCompany
@@ -28,7 +28,7 @@ class BrancheViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
     
-
+# BusinessPartners
 class BusinessPartnersViewSet(viewsets.ModelViewSet):
     queryset = models.BusinessPartners.objects.all()
     serializer_class = serializer.BusinessPartners
@@ -39,3 +39,216 @@ class BusinessPartnersViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
+    
+# ContactUs
+class ContactUsViewSet(viewsets.ModelViewSet):
+    queryset = models.ContactUs.objects.all()
+    serializer_class = serializer.ContactUs
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects)
+        return response.Response(serializer.data)
+    
+    
+# Grouping
+class GroupingViewSet(viewsets.ModelViewSet):
+    queryset = models.Grouping.objects.all()
+    serializer_class = serializer.Grouping
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many=True)
+        return response.Response(serializer.data)
+    
+    
+# HistoryOfCompanies
+class HistoryOfCompaniesViewSet(viewsets.ModelViewSet):
+    queryset = models.HistoryOfCompanies.objects.all()
+    serializer_class = serializer.HistoryOfCompanies
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects)
+        return response.Response(serializer.data)
+    
+    
+# IntroductionOfCompanies
+class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
+    queryset = models.IntroductionOfCompanies.objects.all()
+    serializer_class = serializer.IntroductionOfCompanies
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+# News
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = models.News.objects.all()
+    serializer_class = serializer.News
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+# Products
+class ProductsViewSet(viewsets.ModelViewSet):
+    queryset = models.Products.objects.all()
+    serializer_class = serializer.Products
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+# Questions
+class QuestionsViewSet(viewsets.ModelViewSet):
+    queryset = models.Questions.objects.all()
+    serializer_class = serializer.Questions
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+# QuickAccess
+class QuickAccessViewSet(viewsets.ModelViewSet):
+    queryset = models.QuickAccess.objects.all()
+    serializer_class = serializer.QuickAccess
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+# RelatedLinks
+class RelatedLinksViewSet(viewsets.ModelViewSet):
+    queryset = models.RelatedLinks.objects.all()
+    serializer_class = serializer.RelatedLinks
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+# Slider
+class SliderViewSet(viewsets.ModelViewSet):
+    queryset = models.Slider.objects.all()
+    serializer_class = serializer.Slider
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+# Statistics
+class StatisticsViewSet(viewsets.ModelViewSet):
+    queryset = models.Statistics.objects.all()
+    serializer_class = serializer.Statistics
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+# TypeOfContent
+class TypeOfContentViewSet(viewsets.ModelViewSet):
+    queryset = models.TypeOfContent.objects.all()
+    serializer_class = serializer.TypeOfContent
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+    
+# Email
+class EmailViewSet(viewsets.ModelViewSet):
+    queryset = models.Email.objects.all()
+    serializer_class = serializer.Email
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+    
+# SendEmail
+class SendEmailViewSet(viewsets.ModelViewSet):
+    queryset = models.SendEmail.objects.all()
+    serializer_class = serializer.SendEmail
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+    
+# ReceiveEmail
+class ReceiveEmailViewSet(viewsets.ModelViewSet):
+    queryset = models.ReceiveEmail.objects.all()
+    serializer_class = serializer.ReceiveEmail
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
