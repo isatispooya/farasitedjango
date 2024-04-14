@@ -24,7 +24,7 @@ class Information (models.Model) :
 
 
 #Branchs
-class BranchesOfCompany (models.Model) :
+class BranchsOfCompany (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     Province = models.CharField (max_length=100)

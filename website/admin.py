@@ -4,7 +4,7 @@ from . import models
 
 # Register your models here.
 admin.site.register(models.Information)
-admin.site.register(models.BranchesOfCompany)
+admin.site.register(models.BranchsOfCompany)
 admin.site.register(models.BusinessPartners)
 admin.site.register(models.ContactUs)
 admin.site.register(models.HistoryOfCompanies)

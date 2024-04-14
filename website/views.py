@@ -16,10 +16,10 @@ class InformationViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_object)
         return response.Response(serializer.data)
 
-# BranchesOfCompany
-class BrancheViewSet(viewsets.ModelViewSet):
-    queryset = models.BranchesOfCompany.objects.all()
-    serializer_class = serializer.BranchesOfCompany
+# BranchsOfCompany
+class BranchViewSet(viewsets.ModelViewSet):
+    queryset = models.BranchsOfCompany.objects.all()
+    serializer_class = serializer.BranchsOfCompany
     def list(self, request):
         Domain = request.query_params.get('Domain')
         if Domain is None:

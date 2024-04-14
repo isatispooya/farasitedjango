@@ -9,9 +9,9 @@ class Information (serializers.ModelSerializer) :
         fields = '__all__' 
 
 
-class BranchesOfCompany (serializers.ModelSerializer) :
+class BranchsOfCompany (serializers.ModelSerializer) :
     class Meta:
-        model = models.BranchesOfCompany
+        model = models.BranchsOfCompany
         fields = '__all__' 
 
         

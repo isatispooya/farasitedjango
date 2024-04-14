@@ -4,7 +4,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('information', views.InformationViewSet)
-router.register('branche', views.BrancheViewSet)
+router.register('branch', views.BranchViewSet)
 router.register('businessPartners', views.BusinessPartnersViewSet)
 router.register('contactus', views.ContactUsViewSet)
 router.register('grouping', views.GroupingViewSet)
