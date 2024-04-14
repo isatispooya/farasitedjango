@@ -117,7 +117,24 @@ class ProductsViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
+
+
+
+# SoloProducts
+class SoloProductsViewSet(viewsets.ModelViewSet):
+    queryset = models.Products.objects.all()
+    serializer_class = serializer.Products
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        route = request.query_params.get('route')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain , route=route ).last()
+        serializer = self.get_serializer(filtered_objects)
+        return response.Response(serializer.data)
     
+
+
     
 # Questions
 class QuestionsViewSet(viewsets.ModelViewSet):
