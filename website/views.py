@@ -48,7 +48,7 @@ class ContactUsViewSet(viewsets.ModelViewSet):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        filtered_objects = self.get_queryset().filter(Domain=Domain).last()
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
     
@@ -75,7 +75,7 @@ class HistoryOfCompaniesViewSet(viewsets.ModelViewSet):
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
         filtered_objects = self.get_queryset().filter(Domain=Domain)
-        serializer = self.get_serializer(filtered_objects)
+        serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
     
