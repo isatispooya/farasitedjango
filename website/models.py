@@ -15,7 +15,7 @@ class Information (models.Model) :
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
     tweeter = models.CharField (max_length=255,blank=True, null=True)
-    Cataloge = models.CharField (max_length=255,blank=True, null=True , blank=True, null=True)
+    Cataloge = models.CharField (max_length=255,blank=True, null=True)
     Description = models.CharField (max_length=500 , blank=True, null=True)
     Keywords = models.CharField (max_length=500 ,blank=True, null=True)
     Admin = models.CharField (max_length=255)
