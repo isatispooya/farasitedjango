@@ -40,7 +40,7 @@ class BusinessPartners (models.Model) :
     CreateAt = models.DateTimeField()
     Domain =  models.CharField (max_length=255)
     Name =  models.CharField (max_length=255)
-    Logo =  models.CharField (upload_to='static/images/')
+    Logo =  models.ImageField (upload_to='static/images/')
     Link =  models.CharField (max_length=255)
 
 
@@ -64,7 +64,7 @@ class Grouping (models.Model) :
     CreateAt = models.DateTimeField()
     Domain =  models.CharField (max_length=255)
     Title = models.CharField (max_length=255)
-    Icone = models.CharField (upload_to='static/images/')
+    Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
 
 
@@ -75,22 +75,22 @@ class HistoryOfCompanies (models.Model) :
     Date = models.CharField (max_length=12)
     Title = models.CharField (max_length=255)
     Paragraph = models.CharField (max_length=700)
-    Picture = models.CharField (upload_to='static/images/') 
-    Video = models.CharField (upload_to='static/images/') 
+    Picture = models.ImageField (upload_to='static/images/') 
+    Video = models.FileField (upload_to='static/images/') 
     Domain = models.CharField (max_length=255)
-    Icon = models.CharField (upload_to='static/images/')
+    Icon = models.ImageField (upload_to='static/images/')
 
 
 #IntroductionOfCompanies
 class IntroductionOfCompanies (models.Model) :
-    Logo =models.CharField (upload_to='static/images/')
+    Logo =models.ImageField (upload_to='static/images/')
     Name =models.CharField (max_length=255)
     Link =models.CharField (max_length=255)
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
     ShortAboutUs = models.CharField (max_length=700)
     LongAboutUs = models.CharField (max_length=1500)
-    Picture = models.CharField (upload_to='static/images/')
+    Picture = models.ImageField (upload_to='static/images/')
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
     Size = models.IntegerField ()
@@ -111,7 +111,7 @@ class News (models.Model) :
     TypeOfContent = models.CharField (max_length=255)
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
-    Picture = models.CharField (upload_to='static/images/')
+    Picture = models.ImageField (upload_to='static/images/')
 
 
 
@@ -119,7 +119,7 @@ class News (models.Model) :
 class Products (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Picture =models.CharField (upload_to='static/images/')
+    Picture =models.ImageField (upload_to='static/images/')
     Paragraph = models.CharField (max_length=1000)
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
@@ -139,7 +139,7 @@ class QuickAccess (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     Url = models.CharField (max_length=255)
-    Picture = models.CharField (upload_to='static/images/')
+    Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=500)
 
 
@@ -157,7 +157,7 @@ class RelatedLinks (models.Model) :
 
 #Slider
 class Slider (models.Model) :
-    Picture = models.CharField (upload_to='static/images/')
+    Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=300)
     Alt = models.CharField (max_length=300)
     Domain = models.CharField (max_length=300)
@@ -171,7 +171,7 @@ class Statistics (models.Model) :
     Domain = models.CharField (max_length=300)
     Title = models.CharField (max_length=300)
     Number = models.CharField (max_length=300)
-    Icon = models.CharField (upload_to='static/images/')
+    Icon = models.ImageField (upload_to='static/images/')
     # Status = BooleanField ()
 
 
@@ -187,7 +187,7 @@ class TypeOfContent (models.Model) :
 class GalleryPhoto (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Picture =models.CharField (upload_to='static/images/')
+    Picture =models.ImageField (upload_to='static/images/')
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
 
@@ -196,7 +196,7 @@ class GalleryPhoto (models.Model) :
 class GalleryVideo (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Video =models.CharField (upload_to='static/images/')
+    Video =models.FileField (upload_to='static/images/')
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
 
