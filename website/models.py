@@ -76,9 +76,9 @@ class HistoryOfCompanies (models.Model) :
     Title = models.CharField (max_length=255)
     Paragraph = models.CharField (max_length=700)
     Picture = models.ImageField (upload_to='static/images/') 
-    Video = models.FileField (upload_to='static/images/') 
+    Video = models.FileField (upload_to='static/images/' , blank=True, null=True) 
     Domain = models.CharField (max_length=255)
-    Icon = models.ImageField (upload_to='static/images/')
+    Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
 
 
 #IntroductionOfCompanies
