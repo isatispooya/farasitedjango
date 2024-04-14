@@ -94,7 +94,6 @@ class IntroductionOfCompanies (models.Model) :
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
     twitter =models.CharField (max_length=255,blank=True, null=True)
-    twiter =models.CharField (max_length=255,blank=True, null=True)
     Size = models.IntegerField ()
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
