@@ -76,7 +76,7 @@ class Grouping (models.Model) :
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
     def __str__(self):
-        return self.Title
+        return  self.Domain + '<' +self.Title+'>'
 
 
 #HistoryOfCompanies
