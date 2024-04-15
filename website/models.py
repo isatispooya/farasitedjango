@@ -26,6 +26,8 @@ class Information (models.Model) :
     Admin = models.CharField (max_length=255)
     Date = models.CharField (max_length=255)
     FieldOfActivity = models.CharField (max_length=255)
+    def __str__(self):
+        return self.Domain + '<' +self.Name+'>'
 
 #Branchs
 class BranchsOfCompany (models.Model) :
@@ -37,7 +39,8 @@ class BranchsOfCompany (models.Model) :
     Telephone = models.CharField (max_length=20)
     Code = models.CharField (max_length=5)
     Types = models.CharField (max_length=100)
-
+    def __str__(self):
+        return self.Domain + '<' +self.Address+'>'
 
 #BusinessPartners
 class BusinessPartners (models.Model) :
@@ -46,7 +49,8 @@ class BusinessPartners (models.Model) :
     Name =  models.CharField (max_length=255)
     Logo =  models.ImageField (upload_to='static/images/')
     Link =  models.CharField (max_length=255)
-
+    def __str__(self):
+        return self.Domain + '<' +self.Name+'>'
 
 
 #Contact Us
@@ -59,7 +63,8 @@ class ContactUs (models.Model) :
     Domain = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     CreateAt = models.DateTimeField()
-
+    def __str__(self):
+        return self.Domain + '<' +self.Name+'>'
 
 
 
@@ -84,6 +89,8 @@ class HistoryOfCompanies (models.Model) :
     Video = models.FileField (upload_to='static/images/' , blank=True, null=True) 
     Domain = models.CharField (max_length=255)
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
+    def __str__(self):
+        return self.Domain + '<' +self.Date+'>' +  '<' +self.Title+'>'
 
 
 #IntroductionOfCompanies
@@ -102,6 +109,8 @@ class IntroductionOfCompanies (models.Model) :
     Size = models.IntegerField ()
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
+    def __str__(self):
+        return self.Domain + '<' +self.Name+'>'
 
 #TypeOfContent
 class TypeOfContent (models.Model) :
@@ -110,6 +119,8 @@ class TypeOfContent (models.Model) :
     Title = models.CharField (max_length=300, unique=True)
     def __str__(self):
         return self.Title
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
 
 #News
 class News (models.Model) :
@@ -123,6 +134,8 @@ class News (models.Model) :
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/')
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>' + '<'+self.Grouping+'>' + '<'+self.TypeOfContent+'>'
 
 
 #Products
@@ -134,7 +147,7 @@ class Products (models.Model) :
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     def __str__(self):
-        return self.Title
+        return self.Domain + '<' +self.Title+'>'
 
 
 #Questions
@@ -143,6 +156,8 @@ class Questions (models.Model) :
     Answer = models.CharField (max_length=1000)
     Domain = models.CharField (max_length=255)
     CreateAt = models.DateTimeField()
+    def __str__(self):
+        return self.Domain + '<' +self.Question+'>'
 
 
 #QuickAccess 
@@ -152,6 +167,8 @@ class QuickAccess (models.Model) :
     Url = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=500)
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
 
 
 
@@ -162,6 +179,8 @@ class RelatedLinks (models.Model) :
     Domain = models.CharField (max_length=255)
     Link = models.CharField (max_length=255)
     Title = models.CharField (max_length=300)
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
    
 
    
@@ -174,6 +193,8 @@ class Slider (models.Model) :
     Domain = models.CharField (max_length=300)
     CreateAt = models.DateTimeField()
     # Status = BooleanField ()
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
 
 
 #Statistics
@@ -184,6 +205,8 @@ class Statistics (models.Model) :
     Number = models.CharField (max_length=300)
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     # Status = BooleanField ()
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
 
 
 
@@ -196,6 +219,8 @@ class GalleryPhoto (models.Model) :
     Picture =models.ImageField (upload_to='static/images/')
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
+    def __str__(self):
+        return self.Domain + '<' +self.Alt+'>'
 
 
 #GalleryVideo
@@ -205,6 +230,8 @@ class GalleryVideo (models.Model) :
     Video =models.FileField (upload_to='static/images/')
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
+    def __str__(self):
+        return self.Domain + '<' +self.Alt+'>'
 
 
 
