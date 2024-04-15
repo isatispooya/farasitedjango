@@ -24,6 +24,8 @@ router.register(viewset=views.TypeOfContentViewSet ,prefix='typeofcontent',basen
 router.register(viewset=views.EmailViewSet ,prefix='email',basename='email')
 router.register(viewset=views.SendEmailViewSet ,prefix='sendemail',basename='sendemail')
 router.register(viewset=views.ReceiveEmailViewSet ,prefix='receiveemail',basename='receiveemail')
+router.register(viewset=views.NewsWithRoutViewSet ,prefix='newswithroute',basename='newswithroute')
+router.register(viewset=views.NewsWithGroupingViewSet ,prefix='newswithgrouping',basename='newswithgrouping')
 
 
 urlpatterns = [

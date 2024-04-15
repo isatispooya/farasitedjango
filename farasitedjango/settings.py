@@ -25,7 +25,16 @@ SECRET_KEY = 'django-insecure-u69^8*1=n6o3f*^hj_blrt_*0846r#n-mix332zdtn9#$&8qa3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','localhost','http://localhost','http://localhost:3000','109.125.151.26']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://farasite.fidip.ir',
+    'http://farasite.fidip.ir'
+]
+
+ALLOWED_HOSTS = ['*','farasite.fidip.ir','https://farasite.fidip.ir','localhost','http://localhost','http://localhost:3000','109.125.151.26']
 
 
 # Application definition

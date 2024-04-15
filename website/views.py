@@ -113,10 +113,12 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
     serializer_class = serializer.News
     def list(self, request):
         Domain = request.query_params.get('Domain')
-        Grouping = request.query_params.get('Grouping')
+        grouping = request.query_params.get('grouping')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain , Grouping = Grouping )
+        if grouping is None:
+            raise serializers.ValidationError('Parameter "grouping" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain , Grouping = grouping )
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
@@ -132,6 +134,8 @@ class NewsWithRoutViewSet(viewsets.ModelViewSet):
         route = request.query_params.get('route')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
+        if route is None:
+            raise serializers.ValidationError('Parameter "route" is required.')
         filtered_objects = self.get_queryset().filter(Domain=Domain , route = route).last()
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
