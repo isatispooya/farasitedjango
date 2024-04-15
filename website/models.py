@@ -1,5 +1,10 @@
 from django.db import models
 
+class Domain(models.Model):
+    name = models.CharField(max_length=255)
+    domain = models.CharField(max_length=64)
+    owner = models.CharField(max_length=255)
+
 #Informations
 class Information (models.Model) :
     CreateAt = models.DateTimeField ()
@@ -21,7 +26,6 @@ class Information (models.Model) :
     Admin = models.CharField (max_length=255)
     Date = models.CharField (max_length=255)
     FieldOfActivity = models.CharField (max_length=255)
-
 
 #Branchs
 class BranchsOfCompany (models.Model) :
@@ -63,10 +67,11 @@ class ContactUs (models.Model) :
 class Grouping (models.Model) :
     CreateAt = models.DateTimeField()
     Domain =  models.CharField (max_length=255)
-    Title = models.CharField (max_length=255)
+    Title = models.CharField (max_length=255, unique=True)
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
-
+    def __str__(self):
+        return self.Title
 
 
 #HistoryOfCompanies
@@ -98,8 +103,13 @@ class IntroductionOfCompanies (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
 
-
-
+#TypeOfContent
+class TypeOfContent (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300, unique=True)
+    def __str__(self):
+        return self.Title
 
 #News
 class News (models.Model) :
@@ -107,13 +117,12 @@ class News (models.Model) :
     Domain = models.CharField (max_length=255)
     Content = models.CharField (max_length=10000)
     KeyWord = models.CharField (max_length=500)
-    Grouping = models.CharField (max_length=255)
+    Grouping = models.ForeignKey(Grouping, on_delete=models.CASCADE, to_field='Title')
     Title = models.CharField (max_length=500)
-    TypeOfContent = models.CharField (max_length=255)
+    TypeOfContent = models.ForeignKey(TypeOfContent, on_delete=models.CASCADE, to_field='Title')
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/')
-
 
 
 #Products
@@ -124,7 +133,8 @@ class Products (models.Model) :
     Paragraph = models.CharField (max_length=1000)
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
-
+    def __str__(self):
+        return self.Title
 
 
 #Questions
@@ -176,12 +186,7 @@ class Statistics (models.Model) :
     # Status = BooleanField ()
 
 
-#TypeOfContent
-class TypeOfContent (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=300)
-    Title = models.CharField (max_length=300)
-    # Status = BooleanField ()
+
 
 
 #GalleryPhoto

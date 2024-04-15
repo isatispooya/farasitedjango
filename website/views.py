@@ -129,6 +129,8 @@ class SoloProductsViewSet(viewsets.ModelViewSet):
         route = request.query_params.get('route')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
+        if route is None:
+            raise serializers.ValidationError('Parameter "route" is required.')
         filtered_objects = self.get_queryset().filter(Domain=Domain , route=route ).last()
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)

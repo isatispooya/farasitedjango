@@ -23,4 +23,5 @@ admin.site.register(models.GalleryVideo)
 admin.site.register(models.Email)
 admin.site.register(models.ReceiveEmail)
 admin.site.register(models.SendEmail)
+admin.site.register(models.Domain)
 
