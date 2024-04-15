@@ -136,7 +136,9 @@ class NewsWithRoutViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
     
-    
+
+
+
 # Products
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = models.Products.objects.all()
