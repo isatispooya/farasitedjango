@@ -72,7 +72,7 @@ class ContactUs (models.Model) :
 class Grouping (models.Model) :
     CreateAt = models.DateTimeField()
     Domain =  models.CharField (max_length=255)
-    Title = models.CharField (max_length=255, unique=True)
+    Title = models.CharField (max_length=255)
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
     def __str__(self):
@@ -116,7 +116,7 @@ class IntroductionOfCompanies (models.Model) :
 class TypeOfContent (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=300)
-    Title = models.CharField (max_length=300, unique=True)
+    Title = models.CharField (max_length=300)
     def __str__(self):
         return self.Title
     def __str__(self):
@@ -128,12 +128,12 @@ class News (models.Model) :
     Domain = models.CharField (max_length=255)
     Content = models.CharField (max_length=10000)
     KeyWord = models.CharField (max_length=500)
-    Grouping = models.ForeignKey(Grouping, on_delete=models.CASCADE, to_field='Title')
+    Grouping = models.CharField(max_length=255, choices=[(group.Title, group.Title) for group in Grouping.objects.all()], default='مقالات')
     Title = models.CharField (max_length=500)
-    TypeOfContent = models.ForeignKey(TypeOfContent, on_delete=models.CASCADE, to_field='Title')
+    TypeOfContent = models.CharField(max_length=255, choices=[(content.Title, content.Title) for content in TypeOfContent.objects.all()], default='مقالات')
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
-    Picture = models.ImageField (upload_to='static/images/')
+    Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     def __str__(self):
         return self.Domain + '<' +self.Title+'>' + '<'+self.Grouping+'>' + '<'+self.TypeOfContent+'>'
 
@@ -143,9 +143,10 @@ class Products (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     Picture =models.ImageField (upload_to='static/images/')
-    Paragraph = models.CharField (max_length=1000)
+    Paragraph = models.TextField ()
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
+    AdditionalImages = models.ImageField (upload_to='static/images/',blank=True, null=True)
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 
