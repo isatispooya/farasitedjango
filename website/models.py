@@ -15,7 +15,7 @@ class Information (models.Model) :
     Telephone = models.CharField (max_length=255)
     Address = models.CharField (max_length=255)
     NationalID = models.CharField (max_length=12)
-    AboutUs = models.CharField (max_length=700)
+    AboutUs = models.TextField ()
     Theme = models.IntegerField (blank=True, null=True)
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
@@ -84,7 +84,7 @@ class HistoryOfCompanies (models.Model) :
     CreateAt = models.DateTimeField()
     Date = models.CharField (max_length=12)
     Title = models.CharField (max_length=255)
-    Paragraph = models.CharField (max_length=700 , blank=True, null=True)
+    Paragraph = models.TextField (blank=True, null=True)
     Picture = models.ImageField (upload_to='static/images/' , blank=True, null=True) 
     Video = models.FileField (upload_to='static/images/' , blank=True, null=True) 
     Domain = models.CharField (max_length=255)
@@ -100,8 +100,8 @@ class IntroductionOfCompanies (models.Model) :
     Link =models.CharField (max_length=255)
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
-    ShortAboutUs = models.CharField (max_length=700)
-    LongAboutUs = models.CharField (max_length=1500)
+    ShortAboutUs = models.TextField ()
+    LongAboutUs = models.TextField ()
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
@@ -126,7 +126,7 @@ class TypeOfContent (models.Model) :
 class News (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Content = models.CharField (max_length=10000)
+    Content = models.TextField ()
     KeyWord = models.CharField (max_length=500)
     Grouping = models.CharField(max_length=255, choices=[(group.Title, group.Title) for group in Grouping.objects.all()], default='مقالات')
     Title = models.CharField (max_length=500)
@@ -154,7 +154,7 @@ class Products (models.Model) :
 #Questions
 class Questions (models.Model) :
     Question = models.CharField (max_length=500)
-    Answer = models.CharField (max_length=1000)
+    Answer = models.TextField ()
     Domain = models.CharField (max_length=255)
     CreateAt = models.DateTimeField()
     def __str__(self):
