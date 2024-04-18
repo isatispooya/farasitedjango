@@ -160,10 +160,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST='smtp.c1.liara.email'
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST="smtp.c1.liara.email"
 EMAIL_PORT=587
-EMAIL_HOST_USER='sweet_albattani_0pag9t'
-EMAIL_HOST_PASSWORD='0fad60f5-c980-4bd9-89ec-9bb965a6a350'
+EMAIL_HOST_USER="brave_kare_ko005v"
+EMAIL_HOST_PASSWORD="1a0e0e18-7e1e-476f-8920-239dbcbb96c1"
 EMAIL_USE_TLS=True
