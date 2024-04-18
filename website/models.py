@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator, MaxFileSizeValidator
 
 class Domain(models.Model):
     name = models.CharField(max_length=255)
@@ -228,11 +229,12 @@ class GalleryPhoto (models.Model) :
 class GalleryVideo (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Video =models.FileField (upload_to='static/images/')
+    Video =models.FileField (upload_to='static/images/',validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), MaxFileSizeValidator(100*1024*1024)] )
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     def __str__(self):
         return self.Domain + '<' +self.Alt+'>'
+
 
 
 
