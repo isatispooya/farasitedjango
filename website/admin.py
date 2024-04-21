@@ -2,6 +2,7 @@ from django.contrib import admin
 from . import models
 
 
+
 # Register your models here.
 admin.site.register(models.Information)
 admin.site.register(models.BranchsOfCompany)
@@ -25,4 +26,5 @@ admin.site.register(models.Email)
 admin.site.register(models.ReceiveEmail)
 admin.site.register(models.SendEmail)
 admin.site.register(models.Domain)
+
 

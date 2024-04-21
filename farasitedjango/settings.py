@@ -25,16 +25,34 @@ SECRET_KEY = 'django-insecure-u69^8*1=n6o3f*^hj_blrt_*0846r#n-mix332zdtn9#$&8qa3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
     'https://farasite.fidip.ir',
-    'http://farasite.fidip.ir'
+    'https://fid.isatispooya.com',
+    'https://insurce.isatispooya.com',
+    'https://ipmill.isatispooya.com',
+    'https://pardisan.isatispooya.com',
 ]
 
-ALLOWED_HOSTS = ['*','farasite.fidip.ir','https://farasite.fidip.ir','localhost','http://localhost','http://localhost:3000','109.125.151.26']
+
+ALLOWED_HOSTS = ['*',
+                 'farasite.fidip.ir',
+                 'https://farasite.fidip.ir',
+                 'localhost',
+                 'http://localhost',
+                 'http://localhost:3000',
+                 '109.125.151.26',
+                'ipmill.isatispooya.com',
+                'fid.isatispooya.com',
+                'pardisan.isatispooya.com',
+                'insurce.isatispooya.com',
+                 ]
 
 
 # Application definition
@@ -47,7 +65,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -58,6 +77,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'farasitedjango.urls'

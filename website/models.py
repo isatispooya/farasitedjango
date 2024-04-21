@@ -157,7 +157,7 @@ class News (models.Model) :
     KeyWord = models.CharField (max_length=500)
     Grouping = models.CharField(max_length=255, choices=[(group.Title, group.Title) for group in Grouping.objects.all()], default='مقالات')
     Title = models.CharField (max_length=500)
-    TypeOfContent = models.CharField(max_length=255, choices=[(content.Title, content.Title) for content in TypeOfContent.objects.all()], default='مقالات')
+    #TypeOfContent = models.CharField(max_length=255, choices=[(content.Title, content.Title) for content in TypeOfContent.objects.all()], default='مقالات')
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
@@ -263,11 +263,23 @@ class GalleryVideo (models.Model) :
 
 
 
-#Email
-class Email (models.Model) :
-    Domain =  models.CharField (max_length=255)
-    CreateAt = models.DateTimeField()
-    SenderEmail =  models.CharField (max_length=255)
+
+
+class Email(models.Model):
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    recipients = models.TextField()  # یک رشته جداشده با کاما که ایمیل‌های گیرندگان را در خود دارد
+    attachment = models.FileField(upload_to='attachments/', null=True, blank=True)  # ضمیمه فایل
+    SENDER_CHOICES = (
+        ('info@isatispooya.com', 'info'),
+        ('admin@isatispooya.com', 'admin'),
+        ('fidip@isatispooya.com', 'fidip'),
+        # ادامه‌ی فهرست آدرس‌های ایمیل و نام‌های فرستنده‌ها به ترتیب
+    )
+    sender = models.CharField(max_length=100, choices=SENDER_CHOICES)
+
+    def __str__(self):
+        return self.subject
 
 
 #SendEmail
