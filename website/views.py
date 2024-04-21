@@ -79,6 +79,21 @@ class HistoryOfCompaniesViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
     
+    
+    
+# ProjectProgress
+class ProjectProgressViewSet(viewsets.ModelViewSet):
+    queryset = models.ProjectProgress.objects.all()
+    serializer_class = serializer.ProjectProgress
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
 # IntroductionOfCompanies
 class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
     queryset = models.IntroductionOfCompanies.objects.all()

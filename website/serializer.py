@@ -35,6 +35,12 @@ class HistoryOfCompanies (serializers.ModelSerializer) :
         model = models.HistoryOfCompanies
         fields = '__all__' 
 
+
+class ProjectProgress (serializers.ModelSerializer) :
+    class Meta:
+        model = models.ProjectProgress
+        fields = '__all__' 
+
 class IntroductionOfCompanies (serializers.ModelSerializer) :
     class Meta:
         model = models.IntroductionOfCompanies

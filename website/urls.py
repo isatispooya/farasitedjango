@@ -9,6 +9,7 @@ router.register(viewset=views.BusinessPartnersViewSet ,prefix='businessPartners'
 router.register(viewset=views.ContactUsViewSet ,prefix='contactus',basename='contactus')
 router.register(viewset=views.GroupingViewSet ,prefix='grouping',basename='grouping')
 router.register(viewset=views.HistoryOfCompaniesViewSet ,prefix='historyofcompanies',basename='historyofcompanies')
+router.register(viewset=views.ProjectProgressViewSet ,prefix='ProjectProgress',basename='ProjectProgress')
 router.register(viewset=views.IntroductionOfCompaniesViewSet ,prefix='introductionofcompanies',basename='introductionofcompanies')
 router.register(viewset=views.NewsViewSet ,prefix='news',basename='news')
 router.register(viewset=views.ProductsViewSet, prefix='products',basename='products')

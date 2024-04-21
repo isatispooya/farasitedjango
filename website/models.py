@@ -1,11 +1,20 @@
 from django.db import models
-from django.core.validators import FileExtensionValidator, MaxFileSizeValidator
+from django.core.validators import FileExtensionValidator
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 class Domain(models.Model):
     name = models.CharField(max_length=255)
     domain = models.CharField(max_length=64)
     owner = models.CharField(max_length=255)
 
+
+# برای اندازه حجم ویدیو اضافه شده است
+def validate_file_size(value):
+    filesize = value.size
+    if filesize > 100 * 1024 * 1024:
+        raise ValidationError(_('The maximum file size that can be uploaded is 100MB.')) 
+    
 #Informations
 class Information (models.Model) :
     CreateAt = models.DateTimeField ()
@@ -13,7 +22,9 @@ class Information (models.Model) :
     Logotext = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     Domain = models.CharField (max_length=255 , blank=True, null=True)
     Name = models.CharField (max_length=255)
-    Telephone = models.CharField (max_length=255)
+    Telephone1 = models.CharField (max_length=255)
+    Telephone2 = models.CharField (max_length=255)
+    Fax = models.CharField (max_length=255)
     Address = models.CharField (max_length=255)
     NationalID = models.CharField (max_length=12)
     AboutUs = models.TextField ()
@@ -27,6 +38,7 @@ class Information (models.Model) :
     Admin = models.CharField (max_length=255)
     Date = models.CharField (max_length=255)
     FieldOfActivity = models.CharField (max_length=255)
+    TypeOfCompany = models.CharField (max_length=255)
     def __str__(self):
         return self.Domain + '<' +self.Name+'>'
 
@@ -77,7 +89,7 @@ class Grouping (models.Model) :
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
     def __str__(self):
-        return  self.Domain + '<' +self.Title+'>'
+        return  self.Title
 
 
 #HistoryOfCompanies
@@ -92,6 +104,20 @@ class HistoryOfCompanies (models.Model) :
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     def __str__(self):
         return self.Domain + '<' +self.Date+'>' +  '<' +self.Title+'>'
+    
+
+
+#ProjectProgress
+class ProjectProgress (models.Model) :
+    CreateAt = models.DateTimeField()
+    Date = models.CharField (max_length=12)
+    Title = models.CharField (max_length=255)
+    Paragraph = models.TextField (blank=True, null=True)
+    File = models.FileField (upload_to='static/pdf/' , blank=True, null=True) 
+    Domain = models.CharField (max_length=255)
+    def __str__(self):
+        return self.Domain + '<' +self.Date+'>' +  '<' +self.Title+'>'
+
 
 
 #IntroductionOfCompanies
@@ -123,7 +149,7 @@ class TypeOfContent (models.Model) :
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 
-#News
+# News
 class News (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
@@ -229,12 +255,11 @@ class GalleryPhoto (models.Model) :
 class GalleryVideo (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
-    Video =models.FileField (upload_to='static/images/',validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), MaxFileSizeValidator(100*1024*1024)] )
+    Video = models.FileField(upload_to='static/images/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), validate_file_size])
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     def __str__(self):
         return self.Domain + '<' +self.Alt+'>'
-
 
 
 
