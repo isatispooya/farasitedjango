@@ -73,6 +73,20 @@ class RelatedLinks (serializers.ModelSerializer) :
         fields = '__all__' 
 
 
+
+class Subscription (serializers.ModelSerializer) :
+    class Meta:
+        model = models.Subscription
+        fields = '__all__' 
+
+
+
+class SubjectSubscription (serializers.ModelSerializer) :
+    class Meta:
+        model = models.SubjectSubscription
+        fields = '__all__' 
+
+
 class Slider (serializers.ModelSerializer) :
     class Meta:
         model = models.Slider

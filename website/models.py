@@ -29,6 +29,8 @@ class Information (models.Model) :
     NationalID = models.CharField (max_length=12)
     AboutUs = models.TextField ()
     Theme = models.IntegerField (blank=True, null=True)
+    MapLink = models.CharField (max_length=255)
+    Email = models.EmailField (max_length=255,blank=True, null=True)
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
     tweeter = models.CharField (max_length=255,blank=True, null=True)
@@ -49,6 +51,7 @@ class BranchsOfCompany (models.Model) :
     Province = models.CharField (max_length=100)
     City = models.CharField (max_length=100)
     Address = models.CharField (max_length=255)
+    MapLink = models.CharField (max_length=255)
     Telephone = models.CharField (max_length=20)
     Code = models.CharField (max_length=5)
     Types = models.CharField (max_length=100)
@@ -209,9 +212,10 @@ class RelatedLinks (models.Model) :
     Title = models.CharField (max_length=300)
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
-   
 
-   
+
+
+
 
 #Slider
 class Slider (models.Model) :
@@ -240,6 +244,34 @@ class Statistics (models.Model) :
 
 
 
+
+#SubjectSubscription
+class SubjectSubscription (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300)
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
+
+
+
+
+
+
+
+
+
+#Subscription
+class Subscription (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=300)
+    Subject = models.CharField (max_length=300)
+    Telephone = models.CharField (max_length=12)
+    def __str__(self):
+        return self.Domain 
+
+
+
 #GalleryPhoto
 class GalleryPhoto (models.Model) :
     CreateAt = models.DateTimeField()
@@ -256,6 +288,7 @@ class GalleryVideo (models.Model) :
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     Video = models.FileField(upload_to='static/images/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), validate_file_size])
+    ShortVideo = models.FileField(upload_to='static/images/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), validate_file_size])
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     def __str__(self):

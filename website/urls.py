@@ -17,6 +17,8 @@ router.register(viewset=views.SoloProductsViewSet, prefix='soloproducts', basena
 router.register(viewset=views.QuestionsViewSet ,prefix='questions', basename='questions')
 router.register(viewset=views.QuickAccessViewSet ,prefix='quickaccess',basename='quickaccess')
 router.register(viewset=views.RelatedLinksViewSet ,prefix='relatedlinks',basename='relatedlinks')
+router.register(viewset=views.SubscriptionViewSet ,prefix='Subscription',basename='Subscription')
+router.register(viewset=views.SubjectSubscriptionViewSet ,prefix='SubjectSubscription',basename='SubjectSubscription')
 router.register(viewset=views.SliderViewSet ,prefix='slider',basename='slider')
 router.register(viewset=views.StatisticsViewSet ,prefix='statistics',basename='statistics')
 router.register(viewset=views.GalleryPhotoViewSet ,prefix='galleryphoto',basename='galleryphoto')

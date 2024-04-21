@@ -231,6 +231,39 @@ class RelatedLinksViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
+
+    
+    
+    
+# SubjectSubscription
+class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
+    queryset = models.SubjectSubscription.objects.all()
+    serializer_class = serializer.SubjectSubscription
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+    
+    
+    
+
+    
+# Subscription
+class SubscriptionViewSet(viewsets.ModelViewSet):
+    queryset = models.Subscription.objects.all()
+    serializer_class = serializer.Subscription
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
     
     
     
