@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework import response
 from . import models
 from . import serializer
+import datetime
 
 # Information 
 class InformationViewSet(viewsets.ModelViewSet):
@@ -254,15 +255,18 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
     
 # Subscription
 class SubscriptionViewSet(viewsets.ModelViewSet):
-    queryset = models.Subscription.objects.all()
-    serializer_class = serializer.Subscription
+
     def list(self, request):
         Domain = request.query_params.get('Domain')
+        Telephone = request.query_params.get('Telephone')
+        Subject = request.query_params.get('Subject')
+        CreateAt = datetime.datetime.now ()
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
-        serializer = self.get_serializer(filtered_objects , many = True)
-        return response.Response(serializer.data)
+        queryset = models.Subscription (Domain = Domain, Telephone= Telephone , Subject = Subject ,CreateAt=CreateAt)
+        queryset.save()
+
+        return response.Response({"sucsses":True})
     
     
     
