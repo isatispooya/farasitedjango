@@ -18,7 +18,8 @@ def validate_file_size(value):
 #Informations
 class Information (models.Model) :
     CreateAt = models.DateTimeField ()
-    Logo = models.ImageField (upload_to='static/images/' , blank=True, null=True)
+    Logo1 = models.ImageField (upload_to='static/images/' , blank=True, null=True)
+    Logo2 = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     Logotext = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     Domain = models.CharField (max_length=255 , blank=True, null=True)
     Name = models.CharField (max_length=255)
@@ -279,6 +280,10 @@ class GalleryPhoto (models.Model) :
     Picture =models.ImageField (upload_to='static/images/')
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
+
+    class Meta:
+        ordering = ['CreateAt']
+        
     def __str__(self):
         return self.Domain + '<' +self.Alt+'>'
 
