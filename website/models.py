@@ -282,7 +282,7 @@ class GalleryPhoto (models.Model) :
     route = models.CharField (max_length=255)
 
     class Meta:
-        ordering = ['CreateAt']
+        ordering = ['-CreateAt']
         
     def __str__(self):
         return self.Domain + '<' +self.Alt+'>'
