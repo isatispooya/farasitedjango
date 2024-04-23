@@ -303,6 +303,36 @@ class GalleryVideo (models.Model) :
 
 
 
+#PositionOfManagers
+class PositionOfManagers (models.Model) :
+    Domain = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300)
+    Senior = models.CharField (max_length=300, blank=True , null= True)
+    Level = models.IntegerField ()
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
+
+
+
+
+
+
+#ManagersPeople
+class ManagersPeople (models.Model) :
+    Domain = models.CharField (max_length=300)
+    Title = models.CharField (max_length=300)
+    Name = models.CharField (max_length=300)
+    Telephone = models.CharField (max_length=300)
+    Email = models.CharField (max_length=300)
+    Picture =models.ImageField (upload_to='static/images/')
+    Position = models.CharField (max_length=300 , choices=[(position.Title, position.Title) for position in PositionOfManagers.objects.all()], default='هیات مدیره')
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
+
+
+
+
+
 class Email(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField()

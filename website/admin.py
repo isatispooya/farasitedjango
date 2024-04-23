@@ -28,5 +28,7 @@ admin.site.register(models.Email)
 admin.site.register(models.ReceiveEmail)
 admin.site.register(models.SendEmail)
 admin.site.register(models.Domain)
+admin.site.register(models.PositionOfManagers)
+admin.site.register(models.ManagersPeople)
 
 

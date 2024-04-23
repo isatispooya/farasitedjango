@@ -4,6 +4,7 @@ from rest_framework import response
 from . import models
 from . import serializer
 import datetime
+import pandas as pd
 
 # Information 
 class InformationViewSet(viewsets.ModelViewSet):
@@ -253,20 +254,23 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
     
 
     
-# Subscription
 class SubscriptionViewSet(viewsets.ModelViewSet):
 
-    def list(self, request):
-        Domain = request.query_params.get('Domain')
-        Telephone = request.query_params.get('Telephone')
-        Subject = request.query_params.get('Subject')
-        CreateAt = datetime.datetime.now ()
+    queryset = models.Subscription.objects.all()
+    serializer_class = serializer.Subscription
+
+    def create(self, request, *args, **kwargs):
+        Domain = request.data.get('Domain')
+        Telephone = request.data.get('Telephone')
+        Subject = request.data.get('Subject')
+        CreateAt = datetime.datetime.now()
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        queryset = models.Subscription (Domain = Domain, Telephone= Telephone , Subject = Subject ,CreateAt=CreateAt)
-        queryset.save()
+        subscription = models.Subscription(Domain=Domain, Telephone=Telephone, Subject=Subject, CreateAt=CreateAt)
+        subscription.save()
 
-        return response.Response({"sucsses":True})
+        return response.Response({"success": True})
+
     
     
     
@@ -314,10 +318,7 @@ class TypeOfContentViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
     
-    
-    
-    
-    
+   
     
     
 # GalleryPhoto
@@ -334,10 +335,7 @@ class GalleryPhotoViewSet(viewsets.ModelViewSet):
     
     
     
-    
-    
-    
-    
+
     
 # GalleryVideo
 class GalleryVideoViewSet(viewsets.ModelViewSet):
@@ -350,6 +348,52 @@ class GalleryVideoViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
+    
+    
+    
+    
+    
+   
+# Chart
+class ChartViewSet(viewsets.ModelViewSet):
+    queryset = models.PositionOfManagers.objects.all()
+    serializer_class = serializer.PositionOfManagers
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializerz = self.get_serializer(filtered_objects , many = True)
+
+        filtered_objects_ManagersPeople = models.ManagersPeople.objects.filter(Domain=Domain)
+        serializer_ManagersPeople = serializer.ManagersPeople(filtered_objects_ManagersPeople, many=True)
+
+        df = pd.DataFrame(serializerz.data)
+        df = df.sort_values(by='Level')
+        df['Senior'] = df['Senior'].fillna('NoSenior')
+        df_root = df[df['Senior']=='NoSenior']
+        dff = pd.DataFrame(serializer_ManagersPeople.data)
+
+        result = []
+
+
+        for i in df_root.index:
+            pos = df['Title'][i]
+            personal = dff[dff['Position'] == pos].to_dict('records')
+            poss_child = list(set(df[df['Senior']== pos]['Title']))
+   
+            child = []
+            for j in poss_child:
+                personal_child = dff[dff['Position'] == j].to_dict('records')
+                child_dic = {'pos':j, 'personal':personal_child}
+                child.append(child_dic)
+
+            dic = {'pos':pos, 'personal':personal, 'children':child}
+            result.append(dic)
+
+        return response.Response(result) 
+    
     
     
     
@@ -399,3 +443,4 @@ class ReceiveEmailViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
+
