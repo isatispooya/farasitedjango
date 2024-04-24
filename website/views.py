@@ -253,7 +253,7 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
     
     
 
-    
+#SubscriptionViewSet 
 class SubscriptionViewSet(viewsets.ModelViewSet):
 
     queryset = models.Subscription.objects.all()
@@ -394,7 +394,32 @@ class ChartViewSet(viewsets.ModelViewSet):
 
         return response.Response(result) 
     
+
+
+
+# Menu
+class MenuViewSet(viewsets.ModelViewSet):
+    queryset = models.Menu.objects.all()
+    serializer_class = serializer.Menu
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many=True)
+        df = pd.DataFrame(serializer.data)
+        result = []
+        for i in list ( set (df['MegaMenu'])) :
+            SubMenu = df[df['MegaMenu']== i ].to_dict ("records")
+            result.append ({'MegaMenu':i,'SubMenu':SubMenu})
+
+
+        return response.Response(result)
     
+    
+    
+    
+ 
     
     
     

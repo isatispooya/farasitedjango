@@ -124,6 +124,14 @@ class positionofmanagers (serializers.ModelSerializer) :
 
 
 
+class Menu (serializers.ModelSerializer) :
+    class Meta:
+        model = models.Menu
+        fields = '__all__' 
+
+
+
+
 
 class ManagersPeople (serializers.ModelSerializer) :
     class Meta:

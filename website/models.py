@@ -93,7 +93,7 @@ class Grouping (models.Model) :
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
     def __str__(self):
-        return  self.Title
+        return self.Domain + '<' +self.Date+'>'
 
 
 #HistoryOfCompanies
@@ -199,6 +199,22 @@ class QuickAccess (models.Model) :
     Url = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=500)
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
+
+
+
+
+
+
+#Menu 
+class Menu (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    MegaMenu = models.CharField (max_length=255)
+    Title = models.CharField (max_length=500)
+    Link = models.CharField (max_length=255)
+    Icon = models.ImageField (upload_to='static/images/' , blank=True , null=True)
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 
@@ -325,7 +341,7 @@ class ManagersPeople (models.Model) :
     Telephone = models.CharField (max_length=300)
     Email = models.CharField (max_length=300)
     Picture =models.ImageField (upload_to='static/images/')
-    Position = models.CharField (max_length=300, choices=[(position.Title, position.Title) for position in positionofmanagers.objects.all()], default='هیات مدیره')
+    Position = models.CharField (max_length=300 ), choices=[(position.Title, position.Title) for position in PositionOfManagers.objects.all()], default='هیات مدیره')
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 
