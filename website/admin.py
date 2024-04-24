@@ -30,5 +30,6 @@ admin.site.register(models.SendEmail)
 admin.site.register(models.Domain)
 admin.site.register(models.PositionOfManagers)
 admin.site.register(models.ManagersPeople)
+admin.site.register(models.Menu)
 
 

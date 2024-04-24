@@ -205,6 +205,22 @@ class QuickAccess (models.Model) :
 
 
 
+
+
+#Menu 
+class Menu (models.Model) :
+    CreateAt = models.DateTimeField()
+    Domain = models.CharField (max_length=255)
+    MegaMenu = models.CharField (max_length=255)
+    Title = models.CharField (max_length=500)
+    Link = models.CharField (max_length=255)
+    Icon = models.ImageField (upload_to='static/images/' , blank=True , null=True)
+    def __str__(self):
+        return self.Domain + '<' +self.Title+'>'
+
+
+
+
 #RelatedLinks
 class RelatedLinks (models.Model) :
     CreateAt = models.DateTimeField()
