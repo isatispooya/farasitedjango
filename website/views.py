@@ -253,7 +253,7 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
     
     
 
-    
+#SubscriptionViewSet 
 class SubscriptionViewSet(viewsets.ModelViewSet):
 
     queryset = models.Subscription.objects.all()

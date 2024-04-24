@@ -93,7 +93,7 @@ class Grouping (models.Model) :
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
     def __str__(self):
-        return  self.Title
+        return self.Domain + '<' +self.Date+'>'
 
 
 #HistoryOfCompanies
@@ -325,7 +325,7 @@ class ManagersPeople (models.Model) :
     Telephone = models.CharField (max_length=300)
     Email = models.CharField (max_length=300)
     Picture =models.ImageField (upload_to='static/images/')
-    Position = models.CharField (max_length=300 , choices=[(position.Title, position.Title) for position in PositionOfManagers.objects.all()], default='هیات مدیره')
+    Position = models.CharField (max_length=300 )#, choices=[(position.Title, position.Title) for position in PositionOfManagers.objects.all()], default='هیات مدیره')
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 
