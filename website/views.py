@@ -356,8 +356,8 @@ class GalleryVideoViewSet(viewsets.ModelViewSet):
    
 # Chart
 class ChartViewSet(viewsets.ModelViewSet):
-    queryset = models.PositionOfManagers.objects.all()
-    serializer_class = serializer.PositionOfManagers
+    queryset = models.positionofmanagers.objects.all()
+    serializer_class = serializer.positionofmanagers
     def list(self, request):
         Domain = request.query_params.get('Domain')
         if Domain is None:

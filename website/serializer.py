@@ -116,9 +116,9 @@ class GalleryVideo (serializers.ModelSerializer) :
 
 
 
-class PositionOfManagers (serializers.ModelSerializer) :
+class positionofmanagers (serializers.ModelSerializer) :
     class Meta:
-        model = models.PositionOfManagers
+        model = models.positionofmanagers
         fields = '__all__' 
 
 

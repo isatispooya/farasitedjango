@@ -161,7 +161,7 @@ class News (models.Model) :
     KeyWord = models.CharField (max_length=500)
     Grouping = models.CharField(max_length=255, choices=[(group.Title, group.Title) for group in Grouping.objects.all()], default='مقالات')
     Title = models.CharField (max_length=500)
-    #TypeOfContent = models.CharField(max_length=255, choices=[(content.Title, content.Title) for content in TypeOfContent.objects.all()], default='مقالات')
+    TypeOfContent = models.CharField(max_length=255, choices=[(content.Title, content.Title) for content in TypeOfContent.objects.all()], default='مقالات')
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
@@ -304,7 +304,7 @@ class GalleryVideo (models.Model) :
 
 
 #PositionOfManagers
-class PositionOfManagers (models.Model) :
+class positionofmanagers (models.Model) :
     Domain = models.CharField (max_length=300)
     Title = models.CharField (max_length=300)
     Senior = models.CharField (max_length=300, blank=True , null= True)
@@ -325,7 +325,7 @@ class ManagersPeople (models.Model) :
     Telephone = models.CharField (max_length=300)
     Email = models.CharField (max_length=300)
     Picture =models.ImageField (upload_to='static/images/')
-    Position = models.CharField (max_length=300 , choices=[(position.Title, position.Title) for position in PositionOfManagers.objects.all()], default='هیات مدیره')
+    Position = models.CharField (max_length=300, choices=[(position.Title, position.Title) for position in positionofmanagers.objects.all()], default='هیات مدیره')
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 
