@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from colorfield.fields import ColorField
 
 class Domain(models.Model):
     name = models.CharField(max_length=255)
@@ -132,12 +133,11 @@ class IntroductionOfCompanies (models.Model) :
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
     ShortAboutUs = models.TextField ()
-    LongAboutUs = models.TextField ()
+    LongAboutUs = models.TextField ( blank=True, null=True)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
-    instagram = models.CharField (max_length=255,blank=True, null=True)
-    telegram =models.CharField (max_length=255,blank=True, null=True)
-    twitter =models.CharField (max_length=255,blank=True, null=True)
+    SubName =models.CharField (max_length=255,blank=True, null=True)
     Size = models.IntegerField ()
+    Background = ColorField (format="hexa" , default='#FFFFFF')
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     def __str__(self):
@@ -341,7 +341,7 @@ class ManagersPeople (models.Model) :
     Telephone = models.CharField (max_length=300)
     Email = models.CharField (max_length=300)
     Picture =models.ImageField (upload_to='static/images/')
-    Position = models.CharField (max_length=300 ), choices=[(position.Title, position.Title) for position in positionofmanagers.objects.all()], default='هیات مدیره')
+    Position = models.CharField (max_length=300 , choices=[(position.Title, position.Title) for position in positionofmanagers.objects.all()], default='هیات مدیره')
     def __str__(self):
         return self.Domain + '<' +self.Title+'>'
 

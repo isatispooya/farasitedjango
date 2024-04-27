@@ -5,6 +5,7 @@ from . import models
 from . import serializer
 import datetime
 import pandas as pd
+from random import sample , randint
 
 # Information 
 class InformationViewSet(viewsets.ModelViewSet):
@@ -106,7 +107,22 @@ class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
-        return response.Response(serializer.data)
+        df = pd.DataFrame(serializer.data)
+        df = df.sample(frac=1).reset_index(drop=True)
+        df = df[df.index<=20]
+        df['Size']= [randint(1,3) for x in df.index]
+        while df['Size'].sum () != 24 :
+            inx = randint(0,df.index.max())
+            sumsize = df['Size'].sum ()
+            Size = df['Size'][inx]
+            Increase = sumsize < 24 
+            Decrease = sumsize > 24
+            if Increase and  Size < 3 :
+                df['Size'][inx] = Size+1
+            elif Decrease and Size > 1 :
+                df['Size'][inx] = Size-1
+        df = df.to_dict('records')
+        return response.Response(df)
     
     
 # News
@@ -415,7 +431,6 @@ class MenuViewSet(viewsets.ModelViewSet):
 
 
         return response.Response(result)
-    
     
     
     
