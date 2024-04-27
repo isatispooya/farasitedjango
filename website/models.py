@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from colorfield.fields import ColorField
 
 class Domain(models.Model):
     name = models.CharField(max_length=255)
@@ -132,12 +133,11 @@ class IntroductionOfCompanies (models.Model) :
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
     ShortAboutUs = models.TextField ()
-    LongAboutUs = models.TextField ()
+    LongAboutUs = models.TextField ( blank=True, null=True)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
-    instagram = models.CharField (max_length=255,blank=True, null=True)
-    telegram =models.CharField (max_length=255,blank=True, null=True)
-    twitter =models.CharField (max_length=255,blank=True, null=True)
+    SubName =models.CharField (max_length=255,blank=True, null=True)
     Size = models.IntegerField ()
+    Background = ColorField (format="hexa" , default='#FFFFFF')
     CreateAt = models.DateTimeField()
     Domain = models.CharField (max_length=255)
     def __str__(self):
