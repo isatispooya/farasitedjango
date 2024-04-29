@@ -8,7 +8,7 @@ from django.utils.timezone import now
 
 class Domain(models.Model):
     name = models.CharField(max_length=255)
-    domain = models.CharField(max_length=64, unique=True,primary_key=True)
+    domain = models.CharField(max_length=64, unique=True)
     CreateAt = models.DateTimeField (default=now)
     class Meta:
         verbose_name = "دامنه"
