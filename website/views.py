@@ -39,7 +39,7 @@ class BusinessPartnersViewSet(viewsets.ModelViewSet):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
         serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
     
@@ -64,7 +64,7 @@ class GroupingViewSet(viewsets.ModelViewSet):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
         serializer = self.get_serializer(filtered_objects , many=True)
         return response.Response(serializer.data)
     
@@ -105,14 +105,17 @@ class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
         df = pd.DataFrame(serializer.data)
+        if len(df)==0:
+            return response.Response([])
+
         df = df.sample(frac=1).reset_index(drop=True)
         df = df[df.index<=20]
         df['Size']= [randint(1,3) for x in df.index]
         while df['Size'].sum () != 24 :
-            inx = randint(0,df.index.max())
+            inx = randint(0,df.index.max()*1)
             sumsize = df['Size'].sum ()
             Size = df['Size'][inx]
             Increase = sumsize < 24 
@@ -406,7 +409,7 @@ class ChartViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializerz = self.get_serializer(filtered_objects , many = True)
         
-        filtered_objects_ManagersPeople = models.ManagersPeople.objects.filter(Position=serializerz.data[0]['id'])
+        filtered_objects_ManagersPeople = models.ManagersPeople.objects.all()
         serializer_ManagersPeople = serializer.ManagersPeople(filtered_objects_ManagersPeople, many=True)
 
         df = pd.DataFrame(serializerz.data)

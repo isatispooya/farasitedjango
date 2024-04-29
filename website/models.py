@@ -20,8 +20,8 @@ class Domain(models.Model):
 # برای اندازه حجم ویدیو اضافه شده است
 def validate_file_size(value):
     filesize = value.size
-    if filesize > 100 * 1024 * 1024:
-        raise ValidationError(_('The maximum file size that can be uploaded is 100MB.')) 
+    if filesize > 400 * 1024 * 1024:
+        raise ValidationError(_('مگه جنگه؟!!! فایل بیششتر از 400 مگابایت نمیشه اپلود کرد')) 
     
 #Informations
 class Information (models.Model) :
@@ -441,7 +441,7 @@ class ManagersPeople (models.Model) :
         verbose_name = "مدیر"
         verbose_name_plural = "مدیران"
     def __str__(self):
-        return str(self.Domain) + '[' +self.Title+ ' - ' + self.Name +']'
+        return str(self.Position) + '[' +self.Title+ ' - ' + self.Name +']'
 
 
 
