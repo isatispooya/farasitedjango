@@ -31,5 +31,7 @@ admin.site.register(models.Domain)
 admin.site.register(models.positionofmanagers)
 admin.site.register(models.ManagersPeople)
 admin.site.register(models.Menu)
+admin.site.register(models.ContentTabs)
+admin.site.register(models.QaOfContentTabs)
 
 

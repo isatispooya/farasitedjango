@@ -3,11 +3,18 @@ from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from colorfield.fields import ColorField
+from django.utils.timezone import now
+
 
 class Domain(models.Model):
     name = models.CharField(max_length=255)
-    domain = models.CharField(max_length=64)
-    owner = models.CharField(max_length=255)
+    domain = models.CharField(max_length=64, unique=True,primary_key=True)
+    CreateAt = models.DateTimeField (default=now)
+    class Meta:
+        verbose_name = "دامنه"
+        verbose_name_plural = "دامنه ها"
+    def __str__(self):
+        return self.name+ '(' + self.domain+')'
 
 
 # برای اندازه حجم ویدیو اضافه شده است
@@ -18,11 +25,11 @@ def validate_file_size(value):
     
 #Informations
 class Information (models.Model) :
-    CreateAt = models.DateTimeField ()
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Logo1 = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     Logo2 = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     Logotext = models.ImageField (upload_to='static/images/' , blank=True, null=True)
-    Domain = models.CharField (max_length=255 , blank=True, null=True)
     Name = models.CharField (max_length=255)
     Telephone1 = models.CharField (max_length=255)
     Telephone2 = models.CharField (max_length=255)
@@ -43,13 +50,16 @@ class Information (models.Model) :
     Date = models.CharField (max_length=255)
     FieldOfActivity = models.CharField (max_length=255)
     TypeOfCompany = models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "اطلاعات پایه"
+        verbose_name_plural = "اطلاعات پایه"
     def __str__(self):
-        return self.Domain + '<' +self.Name+'>'
+        return str(self.Domain)
 
 #Branchs
 class BranchsOfCompany (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Province = models.CharField (max_length=100)
     City = models.CharField (max_length=100)
     Address = models.CharField (max_length=255)
@@ -57,150 +67,213 @@ class BranchsOfCompany (models.Model) :
     Telephone = models.CharField (max_length=20)
     Code = models.CharField (max_length=5)
     Types = models.CharField (max_length=100)
+    class Meta:
+        verbose_name = "شعبه"
+        verbose_name_plural = "شعب"
     def __str__(self):
-        return self.Domain + '<' +self.Address+'>'
+        return str(self.Domain) + ' [' +self.Address+']'
 
 #BusinessPartners
 class BusinessPartners (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain =  models.CharField (max_length=255)
+    Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Name =  models.CharField (max_length=255)
     Logo =  models.ImageField (upload_to='static/images/')
     Link =  models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "شریک تجاری"
+        verbose_name_plural = "شرکای تجاری"
     def __str__(self):
-        return self.Domain + '<' +self.Name+'>'
+        return str(self.Domain) + '[' +self.Name+']'
 
 
 #Contact Us
 class ContactUs (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Name = models.CharField (max_length=255)
     Email = models.CharField (max_length=200,blank=True, null=True)
     Phonenumber = models.CharField (max_length=12,blank=True, null=True)
     Subject = models.CharField (max_length=200)
     Message = models.CharField (max_length=1000)
-    Domain = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
-    CreateAt = models.DateTimeField()
+    class Meta:
+        verbose_name = "درباره ما"
+        verbose_name_plural = "درباره ما"
     def __str__(self):
-        return self.Domain + '<' +self.Name+'>'
+        return str(self.Domain) + '[' +self.Name+' - '+self.Subject +']'
 
 
 
-#Grouping 
-class Grouping (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain =  models.CharField (max_length=255)
-    Title = models.CharField (max_length=255)
-    Icone = models.ImageField (upload_to='static/images/')
-    Url = models.CharField (max_length=255)
-    def __str__(self):
-        return self.Domain + '<' +self.Date+'>'
 
 
 #HistoryOfCompanies
 class HistoryOfCompanies (models.Model) :
-    CreateAt = models.DateTimeField()
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Date = models.CharField (max_length=12)
     Title = models.CharField (max_length=255)
     Paragraph = models.TextField (blank=True, null=True)
     Picture = models.ImageField (upload_to='static/images/' , blank=True, null=True) 
     Video = models.FileField (upload_to='static/images/' , blank=True, null=True) 
-    Domain = models.CharField (max_length=255)
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
+    class Meta:
+        verbose_name = "رویداد"
+        verbose_name_plural = "تاریخچه"
     def __str__(self):
-        return self.Domain + '<' +self.Date+'>' +  '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Date+' - ' +self.Title+'>'
     
 
 
 #ProjectProgress
 class ProjectProgress (models.Model) :
-    CreateAt = models.DateTimeField()
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Date = models.CharField (max_length=12)
     Title = models.CharField (max_length=255)
     Paragraph = models.TextField (blank=True, null=True)
-    File = models.FileField (upload_to='static/pdf/' , blank=True, null=True) 
-    Domain = models.CharField (max_length=255)
+    File = models.FileField (upload_to='static/pdf/' , blank=True, null=True)
+    class Meta:
+        verbose_name = "فایل"
+        verbose_name_plural = "پیشرفت پروژه"
     def __str__(self):
-        return self.Domain + '<' +self.Date+'>' +  '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+' - ' +self.Date+'>'
 
 
 
 #IntroductionOfCompanies
 class IntroductionOfCompanies (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Logo =models.ImageField (upload_to='static/images/')
     Name =models.CharField (max_length=255)
     Link =models.CharField (max_length=255)
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
-    ShortAboutUs = models.TextField ()
+    ShortAboutUs = models.TextField (max_length=80)
     LongAboutUs = models.TextField ( blank=True, null=True)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     SubName =models.CharField (max_length=255,blank=True, null=True)
     Size = models.IntegerField ()
     Background = ColorField (format="hexa" , default='#FFFFFF')
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "شرکت"
+        verbose_name_plural = "شرکت ها"
     def __str__(self):
-        return self.Domain + '<' +self.Name+'>'
+        return str(self.Domain) + '['+self.Name+']'
 
 #TypeOfContent
 class TypeOfContent (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=300)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Title = models.CharField (max_length=300)
+    class Meta:
+        verbose_name = "دسته"
+        verbose_name_plural = "دسته بندی"
     def __str__(self):
-        return self.Title
+        return str(self.Domain) + '[' +self.Title+']'
+
+#Content Tabs
+class ContentTabs (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
+    Title = models.TextField ()
+    Description = models.TextField (blank=True, null=True)
+    class Meta:
+        verbose_name = "محتوا"
+        verbose_name_plural = "محتوای تب ها"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
+
+
+class QaOfContentTabs(models.Model):
+    ContentTabs = models.ForeignKey(ContentTabs, on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField(default=now)
+    Question = models.TextField()
+    Answer = models.TextField(blank=True, null=True)
+    Image = models.ImageField(upload_to='static/images/')
+    Link = models.CharField(max_length=150)
+    class Meta:
+        verbose_name = "سوال و جواب تب"
+        verbose_name_plural = "سوالات و جواب های تب"
+
+    def __str__(self):
+        return str(self.ContentTabs) + '[' + self.Question + ']'
+
+
+
+#Grouping 
+class Grouping (models.Model) :
+    CreateAt = models.DateTimeField (default=now)
+    Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
+    Title = models.CharField (max_length=255)
+    Icone = models.ImageField (upload_to='static/images/')
+    Url = models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "گروه"
+        verbose_name_plural = "گروه بندی"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
 
 # News
 class News (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Content = models.TextField ()
     KeyWord = models.CharField (max_length=500)
-    Grouping = models.CharField(max_length=255, choices=[(group.Title, group.Title) for group in Grouping.objects.all()], default='مقالات')
+    Grouping = models.ForeignKey(Grouping, on_delete=models.CASCADE)
     Title = models.CharField (max_length=500)
-    TypeOfContent = models.CharField(max_length=255, choices=[(content.Title, content.Title) for content in TypeOfContent.objects.all()], default='مقالات')
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
+    class Meta:
+        verbose_name = "مقاله"
+        verbose_name_plural = "مقالات"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>' + '<'+self.Grouping+'>' + '<'+self.TypeOfContent+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 #Products
 class Products (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Picture =models.ImageField (upload_to='static/images/')
     Paragraph = models.TextField ()
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     AdditionalImages = models.ImageField (upload_to='static/images/',blank=True, null=True)
+    class Meta:
+        verbose_name = "محصول"
+        verbose_name_plural = "محصولات"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 #Questions
 class Questions (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Question = models.CharField (max_length=500)
     Answer = models.TextField ()
-    Domain = models.CharField (max_length=255)
-    CreateAt = models.DateTimeField()
+    class Meta:
+        verbose_name = "سوال و جواب"
+        verbose_name_plural = "سوالات پر تکرار"
     def __str__(self):
-        return self.Domain + '<' +self.Question+'>'
+        return str(self.Domain) + '[' +self.Question+']'
 
 
 #QuickAccess 
 class QuickAccess (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Url = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=500)
+    class Meta:
+        verbose_name = "لینک"
+        verbose_name_plural = "دسترسی سریع"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 
@@ -209,26 +282,32 @@ class QuickAccess (models.Model) :
 
 #Menu 
 class Menu (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     MegaMenu = models.CharField (max_length=255)
     Title = models.CharField (max_length=500)
     Link = models.CharField (max_length=255)
     Icon = models.ImageField (upload_to='static/images/' , blank=True , null=True)
+    class Meta:
+        verbose_name = "لینک"
+        verbose_name_plural = "منو"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 
 
 #RelatedLinks
 class RelatedLinks (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
-    Link = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Title = models.CharField (max_length=300)
+    Link = models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "لینک"
+        verbose_name_plural = "لینک های مرتبط"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 
@@ -236,26 +315,30 @@ class RelatedLinks (models.Model) :
 
 #Slider
 class Slider (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=300)
     Alt = models.CharField (max_length=300)
-    Domain = models.CharField (max_length=300)
-    CreateAt = models.DateTimeField()
-    # Status = BooleanField ()
+    class Meta:
+        verbose_name = "اسلاید"
+        verbose_name_plural = "اسلاید شو"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 #Statistics
 class Statistics (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=300)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Title = models.CharField (max_length=300)
     Number = models.CharField (max_length=300)
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
-    # Status = BooleanField ()
+    class Meta:
+        verbose_name = "امار"
+        verbose_name_plural = "آمار و ارقام"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 
@@ -264,11 +347,14 @@ class Statistics (models.Model) :
 
 #SubjectSubscription
 class SubjectSubscription (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=300)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Title = models.CharField (max_length=300)
+    class Meta:
+        verbose_name = "موضوع"
+        verbose_name_plural = "موضوعات مشترک شدن"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 
@@ -280,40 +366,47 @@ class SubjectSubscription (models.Model) :
 
 #Subscription
 class Subscription (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=300)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Subject = models.CharField (max_length=300)
     Telephone = models.CharField (max_length=12)
+    class Meta:
+        verbose_name = "اشتراک"
+        verbose_name_plural = "مشترکین"
     def __str__(self):
-        return self.Domain 
+        return str(self.Domain) + '[' + self.Subject + ' - ' + self.Telephone + ']'
 
 
 
 #GalleryPhoto
 class GalleryPhoto (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Picture =models.ImageField (upload_to='static/images/')
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
 
     class Meta:
         ordering = ['-CreateAt']
-        
+        verbose_name = "تصویر"
+        verbose_name_plural = "گالری تصویر"
     def __str__(self):
-        return self.Domain + '<' +self.Alt+'>'
+        return str(self.Domain) + '[' +self.Alt+']'
 
 
 #GalleryVideo
 class GalleryVideo (models.Model) :
-    CreateAt = models.DateTimeField()
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Video = models.FileField(upload_to='static/images/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), validate_file_size])
     ShortVideo = models.FileField(upload_to='static/images/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi']), validate_file_size])
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "ویدئو"
+        verbose_name_plural = "گالری ویدئو"
     def __str__(self):
-        return self.Domain + '<' +self.Alt+'>'
+        return str(self.Domain) + '[' +self.Alt+']'
 
 
 
@@ -321,12 +414,15 @@ class GalleryVideo (models.Model) :
 
 #PositionOfManagers
 class positionofmanagers (models.Model) :
-    Domain = models.CharField (max_length=300)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     Title = models.CharField (max_length=300)
     Senior = models.CharField (max_length=300, blank=True , null= True)
     Level = models.IntegerField ()
+    class Meta:
+        verbose_name = "موقعیت"
+        verbose_name_plural = "موقعیت مدیریتی"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+']'
 
 
 
@@ -335,15 +431,17 @@ class positionofmanagers (models.Model) :
 
 #ManagersPeople
 class ManagersPeople (models.Model) :
-    Domain = models.CharField (max_length=300)
+    Position = models.ForeignKey(positionofmanagers, on_delete=models.CASCADE)
     Title = models.CharField (max_length=300)
     Name = models.CharField (max_length=300)
     Telephone = models.CharField (max_length=300)
     Email = models.CharField (max_length=300)
     Picture =models.ImageField (upload_to='static/images/')
-    Position = models.CharField (max_length=300, choices=[(position.Title, position.Title) for position in positionofmanagers.objects.all()], default='هیات مدیره')
+    class Meta:
+        verbose_name = "مدیر"
+        verbose_name_plural = "مدیران"
     def __str__(self):
-        return self.Domain + '<' +self.Title+'>'
+        return str(self.Domain) + '[' +self.Title+ ' - ' + self.Name +']'
 
 
 
@@ -368,8 +466,8 @@ class Email(models.Model):
 
 #SendEmail
 class SendEmail(models.Model):
-    Domain = models.CharField (max_length=300)
-    CreateAt = models.DateTimeField()
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
     Recipient = models.CharField (max_length=300)
     Subject = models.CharField (max_length=300)
     Body = models.CharField (max_length=10000)
@@ -379,9 +477,9 @@ class SendEmail(models.Model):
  
 #ReceiveEmail
 class ReceiveEmail (models.Model) :
-    Domain = models.CharField (max_length=255)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     Receiver = models.CharField (max_length=255)
     Sender = models.CharField (max_length=255)
     Body = models.CharField (max_length=10000)
     Subject = models.CharField (max_length=300)
-    CreateAt = models.DateTimeField()
+    CreateAt = models.DateTimeField (default=now)

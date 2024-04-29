@@ -113,32 +113,34 @@ class GalleryVideo (serializers.ModelSerializer) :
 
 
 
-
-
-
 class positionofmanagers (serializers.ModelSerializer) :
     class Meta:
         model = models.positionofmanagers
         fields = '__all__' 
 
 
-
-
 class Menu (serializers.ModelSerializer) :
     class Meta:
         model = models.Menu
         fields = '__all__' 
 
 
+class ContentTabs (serializers.ModelSerializer) :
+    class Meta:
+        model = models.ContentTabs
+        fields = '__all__' 
+
+
+class QaOfContentTabs (serializers.ModelSerializer) :
+    class Meta:
+        model = models.QaOfContentTabs
+        fields = '__all__' 
 
 
 class Menu (serializers.ModelSerializer) :
     class Meta:
         model = models.Menu
         fields = '__all__' 
-
-
-
 
 
 class ManagersPeople (serializers.ModelSerializer) :

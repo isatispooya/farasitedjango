@@ -135,9 +135,33 @@ class NewsViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
+
         return response.Response(serializer.data)
     
-    
+
+# News
+class ContentTabsViewSet(viewsets.ModelViewSet):
+    queryset = models.ContentTabs.objects.all()
+    serializer_class = serializer.ContentTabs
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializerz = self.get_serializer(filtered_objects , many = True)
+
+        tabs = pd.DataFrame(serializerz.data)
+        tabs['children'] = [[] for x in tabs.index]
+
+        for i in tabs.index:
+            id = tabs['id'][i]
+            Qa_modal = models.QaOfContentTabs.objects.filter(ContentTabs=id)
+            Qa_serializ = serializer.QaOfContentTabs(Qa_modal,many = True).data
+            Qa_df = pd.DataFrame(Qa_serializ)[['Question','Answer','Image','Link']]
+            Qa_dic = Qa_df.to_dict('records')
+            tabs['children'][i] = Qa_dic
+        tabs = tabs.to_dict('records')
+        return response.Response(tabs)
     
     
 # News With Grouping
@@ -381,8 +405,8 @@ class ChartViewSet(viewsets.ModelViewSet):
         
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializerz = self.get_serializer(filtered_objects , many = True)
-
-        filtered_objects_ManagersPeople = models.ManagersPeople.objects.filter(Domain=Domain)
+        
+        filtered_objects_ManagersPeople = models.ManagersPeople.objects.filter(Position=serializerz.data[0]['id'])
         serializer_ManagersPeople = serializer.ManagersPeople(filtered_objects_ManagersPeople, many=True)
 
         df = pd.DataFrame(serializerz.data)

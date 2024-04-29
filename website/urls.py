@@ -31,6 +31,7 @@ router.register(viewset=views.NewsWithRoutViewSet ,prefix='newswithroute',basena
 router.register(viewset=views.NewsWithGroupingViewSet ,prefix='newswithgrouping',basename='newswithgrouping')
 router.register(viewset=views.ChartViewSet ,prefix='chart',basename='chart')
 router.register(viewset=views.MenuViewSet ,prefix='Menu',basename='Menu')
+router.register(viewset=views.ContentTabsViewSet ,prefix='ContentTabs',basename='ContentTabs')
 
 
 

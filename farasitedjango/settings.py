@@ -130,7 +130,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+SITE_TITLE = "فراسایت"
+SITE_HEADER = "فراسایت" 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
