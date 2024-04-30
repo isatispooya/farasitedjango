@@ -23,7 +23,7 @@ def validate_file_size(value):
     if filesize > 400 * 1024 * 1024:
         raise ValidationError(_('مگه جنگه؟!!! فایل بیششتر از 400 مگابایت نمیشه اپلود کرد')) 
     
-#Informations
+# Informations
 class Information (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -57,7 +57,7 @@ class Information (models.Model) :
         return str(self.Domain)
     
 
-#Branchs
+# Branchs
 class BranchsOfCompany (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -75,7 +75,7 @@ class BranchsOfCompany (models.Model) :
         return str(self.Domain) + ' [' +self.Address+']'
     
 
-#Business Partners
+# Business Partners
 class BusinessPartners (models.Model) :
     Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -89,7 +89,7 @@ class BusinessPartners (models.Model) :
         return str(self.Domain) + '[' +self.Name+']'
 
 
-#Contact Us
+# Contact Us
 class ContactUs (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -126,7 +126,7 @@ class HistoryOfCompanies (models.Model) :
         return str(self.Domain) + '[' +self.Date+' - ' +self.Title+'>'
     
 
-#Project Progress
+# Project Progress
 class ProjectProgress (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -142,7 +142,7 @@ class ProjectProgress (models.Model) :
 
 
 
-#Introduction Of Companies
+# Introduction Of Companies
 class IntroductionOfCompanies (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -164,7 +164,7 @@ class IntroductionOfCompanies (models.Model) :
         return str(self.Domain) + '['+self.Name+']'
 
 
-#Type Of Content
+# Type Of Content
 class TypeOfContent (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -176,7 +176,7 @@ class TypeOfContent (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
-#Content Tabs
+# Content Tabs
 class ContentTabs (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
