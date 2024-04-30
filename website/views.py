@@ -19,7 +19,7 @@ class InformationViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_object)
         return response.Response(serializer.data)
 
-# BranchsOfCompany
+# Branchs Of Company
 class BranchViewSet(viewsets.ModelViewSet):
     queryset = models.BranchsOfCompany.objects.all()
     serializer_class = serializer.BranchsOfCompany
@@ -31,7 +31,7 @@ class BranchViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
     
-# BusinessPartners
+# Business Partners
 class BusinessPartnersViewSet(viewsets.ModelViewSet):
     queryset = models.BusinessPartners.objects.all()
     serializer_class = serializer.BusinessPartners
@@ -69,7 +69,7 @@ class GroupingViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
     
-# HistoryOfCompanies
+# History Of Companies
 class HistoryOfCompaniesViewSet(viewsets.ModelViewSet):
     queryset = models.HistoryOfCompanies.objects.all()
     serializer_class = serializer.HistoryOfCompanies
@@ -81,10 +81,9 @@ class HistoryOfCompaniesViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
+  
     
-    
-    
-# ProjectProgress
+# Project Progress
 class ProjectProgressViewSet(viewsets.ModelViewSet):
     queryset = models.ProjectProgress.objects.all()
     serializer_class = serializer.ProjectProgress
@@ -97,7 +96,7 @@ class ProjectProgressViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
     
-# IntroductionOfCompanies
+# Introduction Of Companies
 class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
     queryset = models.IntroductionOfCompanies.objects.all()
     serializer_class = serializer.IntroductionOfCompanies
@@ -142,6 +141,7 @@ class NewsViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
 
+# Content Tabs
 class ContentTabsViewSet(viewsets.ModelViewSet):
     queryset = models.ContentTabs.objects.all()
     serializer_class = serializer.ContentTabs
@@ -166,7 +166,7 @@ class ContentTabsViewSet(viewsets.ModelViewSet):
         return response.Response(tabs)
 
 
-
+# Comparison
 class ContentComparisonViewSet(viewsets.ModelViewSet):
     queryset = models.ContentComparison.objects.all()
     serializer_class = serializer.ContentComparison
@@ -189,6 +189,7 @@ class ContentComparisonViewSet(viewsets.ModelViewSet):
         return response.Response(tabs)
 
 
+# Content List
 class ContentListViewSet(viewsets.ModelViewSet):
     queryset = models.ContentList.objects.all()
     serializer_class = serializer.ContentList
@@ -209,7 +210,8 @@ class ContentListViewSet(viewsets.ModelViewSet):
             tabs['children'][i] = Qa_dic
         tabs = tabs.to_dict('records')
         return response.Response(tabs)
-    
+
+
 # News With Grouping
 class NewsWithGroupingViewSet(viewsets.ModelViewSet):
     queryset = models.News.objects.all()
@@ -225,8 +227,7 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
-    
-    
+  
     
 # News With Rout
 class NewsWithRoutViewSet(viewsets.ModelViewSet):
@@ -244,8 +245,6 @@ class NewsWithRoutViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
 
-
-
 # Products
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = models.Products.objects.all()
@@ -259,9 +258,7 @@ class ProductsViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
 
-
-
-# SoloProducts
+# Solo Products
 class SoloProductsViewSet(viewsets.ModelViewSet):
     queryset = models.Products.objects.all()
     serializer_class = serializer.Products
@@ -275,8 +272,6 @@ class SoloProductsViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain , route=route ).last()
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
-    
-
 
     
 # Questions
@@ -291,9 +286,8 @@ class QuestionsViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
-    
-    
-# QuickAccess
+   
+# Quick Access
 class QuickAccessViewSet(viewsets.ModelViewSet):
     queryset = models.QuickAccess.objects.all()
     serializer_class = serializer.QuickAccess
@@ -305,9 +299,8 @@ class QuickAccessViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
-    
-    
-# RelatedLinks
+       
+# Related Links
 class RelatedLinksViewSet(viewsets.ModelViewSet):
     queryset = models.RelatedLinks.objects.all()
     serializer_class = serializer.RelatedLinks
@@ -319,11 +312,8 @@ class RelatedLinksViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
-
-    
-    
-    
-# SubjectSubscription
+   
+# Subject Subscription
 class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
     queryset = models.SubjectSubscription.objects.all()
     serializer_class = serializer.SubjectSubscription
@@ -335,11 +325,8 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
-    
-    
-    
 
-#SubscriptionViewSet 
+# Subscription  
 class SubscriptionViewSet(viewsets.ModelViewSet):
 
     queryset = models.Subscription.objects.all()
@@ -358,9 +345,6 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         return response.Response({"success": True})
 
     
-    
-    
-    
 # Slider
 class SliderViewSet(viewsets.ModelViewSet):
     queryset = models.Slider.objects.all()
@@ -372,8 +356,6 @@ class SliderViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
-    
-    
     
     
 # Statistics
@@ -389,9 +371,7 @@ class StatisticsViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
     
-    
-    
-# TypeOfContent
+# Type Of Content
 class TypeOfContentViewSet(viewsets.ModelViewSet):
     queryset = models.TypeOfContent.objects.all()
     serializer_class = serializer.TypeOfContent
@@ -401,13 +381,10 @@ class TypeOfContentViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
-        return response.Response(serializer.data)
-    
+        return response.Response(serializer.data)   
     
    
-    
-    
-# GalleryPhoto
+# Gallery Photo
 class GalleryPhotoViewSet(viewsets.ModelViewSet):
     queryset = models.GalleryPhoto.objects.all()
     serializer_class = serializer.GalleryPhoto
@@ -418,12 +395,9 @@ class GalleryPhotoViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
-    
-    
-    
 
     
-# GalleryVideo
+# Gallery Video
 class GalleryVideoViewSet(viewsets.ModelViewSet):
     queryset = models.GalleryVideo.objects.all()
     serializer_class = serializer.GalleryVideo
@@ -434,10 +408,6 @@ class GalleryVideoViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
-    
-    
-    
-    
     
    
 # Chart
@@ -481,8 +451,6 @@ class ChartViewSet(viewsets.ModelViewSet):
         return response.Response(result) 
     
 
-
-
 # Menu
 class MenuViewSet(viewsets.ModelViewSet):
     queryset = models.Menu.objects.all()
@@ -502,13 +470,7 @@ class MenuViewSet(viewsets.ModelViewSet):
 
         return response.Response(result)
     
-    
-    
- 
-    
-    
-    
-    
+       
 # Email
 class EmailViewSet(viewsets.ModelViewSet):
     queryset = models.Email.objects.all()
@@ -520,12 +482,9 @@ class EmailViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
+       
     
-    
-    
-    
-    
-# SendEmail
+# Send Email
 class SendEmailViewSet(viewsets.ModelViewSet):
     queryset = models.SendEmail.objects.all()
     serializer_class = serializer.SendEmail
@@ -537,11 +496,8 @@ class SendEmailViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
     
-    
-    
-    
-    
-# ReceiveEmail
+ 
+# Receive Email
 class ReceiveEmailViewSet(viewsets.ModelViewSet):
     queryset = models.ReceiveEmail.objects.all()
     serializer_class = serializer.ReceiveEmail

@@ -55,6 +55,7 @@ class Information (models.Model) :
         verbose_name_plural = "Informations"
     def __str__(self):
         return str(self.Domain)
+    
 
 #Branchs
 class BranchsOfCompany (models.Model) :
@@ -72,6 +73,7 @@ class BranchsOfCompany (models.Model) :
         verbose_name_plural = "Branchs"
     def __str__(self):
         return str(self.Domain) + ' [' +self.Address+']'
+    
 
 #Business Partners
 class BusinessPartners (models.Model) :
@@ -107,7 +109,7 @@ class ContactUs (models.Model) :
 
 
 
-#HistoryOfCompanies
+#History Of Companies
 class HistoryOfCompanies (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -124,8 +126,7 @@ class HistoryOfCompanies (models.Model) :
         return str(self.Domain) + '[' +self.Date+' - ' +self.Title+'>'
     
 
-
-#ProjectProgress
+#Project Progress
 class ProjectProgress (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -141,7 +142,7 @@ class ProjectProgress (models.Model) :
 
 
 
-#IntroductionOfCompanies
+#Introduction Of Companies
 class IntroductionOfCompanies (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -162,7 +163,8 @@ class IntroductionOfCompanies (models.Model) :
     def __str__(self):
         return str(self.Domain) + '['+self.Name+']'
 
-#TypeOfContent
+
+#Type Of Content
 class TypeOfContent (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -172,6 +174,7 @@ class TypeOfContent (models.Model) :
         verbose_name_plural = "Type Of Content"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
+
 
 #Content Tabs
 class ContentTabs (models.Model) :
@@ -186,6 +189,7 @@ class ContentTabs (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
+# QA Of Content Tabs
 class QaOfContentTabs(models.Model):
     ContentTabs = models.ForeignKey(ContentTabs, on_delete=models.CASCADE)
     CreateAt = models.DateTimeField(default=now)
@@ -202,18 +206,20 @@ class QaOfContentTabs(models.Model):
         return str(self.ContentTabs) + '[' + self.Question + ']'
 
 
-#Content Tabs
+# Comparison
 class ContentComparison (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
     Title = models.TextField ()
     Description = models.TextField (blank=True, null=True)
     class Meta:
-        verbose_name = "محتوا مقایسه"
-        verbose_name_plural = "محتوای های مقایسه"
+        verbose_name = "Comparison"
+        verbose_name_plural = "Comparison"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
+
+# Comparison Sections
 class ContentComparisonBtn(models.Model):
     ContentTabs = models.ForeignKey(ContentComparison, on_delete=models.CASCADE)
     CreateAt = models.DateTimeField(default=now)
@@ -221,14 +227,13 @@ class ContentComparisonBtn(models.Model):
     Description = models.TextField(blank=True, null=True)
     Image = models.ImageField(upload_to='static/images/')
     class Meta:
-        verbose_name = "محتوای مقایسه بخش"
-        verbose_name_plural = "محتوای مقایسه بخش ها"
+        verbose_name = "sections"
+        verbose_name_plural = "Comparison sections"
     def __str__(self):
         return str(self.ContentTabs) + '[' + self.Title + ']'
     
 
-
-#Content Tabs
+# Content List
 class ContentList (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -236,11 +241,13 @@ class ContentList (models.Model) :
     Description = models.TextField (blank=True, null=True)
     Image = models.ImageField(upload_to='static/images/')
     class Meta:
-        verbose_name = "محتوا لیست"
-        verbose_name_plural = "محتوای های لیست"
+        verbose_name = "List"
+        verbose_name_plural = "Content List"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
+    
 
+# Content List Child
 class ContentListChild(models.Model):
     ContentTabs = models.ForeignKey(ContentList, on_delete=models.CASCADE)
     CreateAt = models.DateTimeField(default=now)
@@ -248,11 +255,10 @@ class ContentListChild(models.Model):
     Description = models.TextField(blank=True, null=True)
     Icon = models.ImageField(upload_to='static/images/')
     class Meta:
-        verbose_name = "محتوای های لیست فرزند"
-        verbose_name_plural = "محتوای های لیست فرزند ها"
+        verbose_name = "Content"
+        verbose_name_plural = "List Child"
     def __str__(self):
-        return str(self.ContentTabs) + '[' + self.Title + ']'
-    
+        return str(self.ContentTabs) + '[' + self.Title + ']'  
 
 
 #Grouping 
@@ -267,6 +273,7 @@ class Grouping (models.Model) :
         verbose_name_plural = "Grouping"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
+
 
 # News
 class News (models.Model) :
@@ -315,7 +322,7 @@ class Questions (models.Model) :
         return str(self.Domain) + '[' +self.Question+']'
 
 
-#QuickAccess 
+#Quick Access 
 class QuickAccess (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -327,10 +334,6 @@ class QuickAccess (models.Model) :
         verbose_name_plural = "QuickAccess"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
-
-
-
-
 
 
 #Menu 
@@ -348,9 +351,7 @@ class Menu (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
-
-
-#RelatedLinks
+#Related Links
 class RelatedLinks (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -361,9 +362,6 @@ class RelatedLinks (models.Model) :
         verbose_name_plural = "Related Links"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
-
-
-
 
 
 #Slider
@@ -394,11 +392,7 @@ class Statistics (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
-
-
-
-
-#SubjectSubscription
+#Subject Subscription
 class SubjectSubscription (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -408,13 +402,6 @@ class SubjectSubscription (models.Model) :
         verbose_name_plural = "Subject Subscription"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
-
-
-
-
-
-
-
 
 
 #Subscription
@@ -430,8 +417,7 @@ class Subscription (models.Model) :
         return str(self.Domain) + '[' + self.Subject + ' - ' + self.Telephone + ']'
 
 
-
-#GalleryPhoto
+#Gallery Photo
 class GalleryPhoto (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -447,7 +433,7 @@ class GalleryPhoto (models.Model) :
         return str(self.Domain) + '[' +self.Alt+']'
 
 
-#GalleryVideo
+#Gallery Video
 class GalleryVideo (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -462,10 +448,7 @@ class GalleryVideo (models.Model) :
         return str(self.Domain) + '[' +self.Alt+']'
 
 
-
-
-
-#PositionOfManagers
+#Position Of Managers
 class positionofmanagers (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     Title = models.CharField (max_length=300)
@@ -478,11 +461,7 @@ class positionofmanagers (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
-
-
-
-
-#ManagersPeople
+#Managers People
 class ManagersPeople (models.Model) :
     Position = models.ForeignKey(positionofmanagers, on_delete=models.CASCADE)
     Title = models.CharField (max_length=300)
@@ -497,9 +476,7 @@ class ManagersPeople (models.Model) :
         return str(self.Position) + '[' +self.Title+ ' - ' + self.Name +']'
 
 
-
-
-
+# Email
 class Email(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField()
@@ -517,7 +494,7 @@ class Email(models.Model):
         return self.subject
 
 
-#SendEmail
+#Send Email
 class SendEmail(models.Model):
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -525,10 +502,9 @@ class SendEmail(models.Model):
     Subject = models.CharField (max_length=300)
     Body = models.CharField (max_length=10000)
     SenderEmail = models.CharField (max_length=300)
-
  
  
-#ReceiveEmail
+#Receive Email
 class ReceiveEmail (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     Receiver = models.CharField (max_length=255)
