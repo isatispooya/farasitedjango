@@ -142,7 +142,6 @@ class NewsViewSet(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
 
-# News
 class ContentTabsViewSet(viewsets.ModelViewSet):
     queryset = models.ContentTabs.objects.all()
     serializer_class = serializer.ContentTabs
@@ -160,12 +159,56 @@ class ContentTabsViewSet(viewsets.ModelViewSet):
             id = tabs['id'][i]
             Qa_modal = models.QaOfContentTabs.objects.filter(ContentTabs=id)
             Qa_serializ = serializer.QaOfContentTabs(Qa_modal,many = True).data
-            Qa_df = pd.DataFrame(Qa_serializ)[['Question','Answer','Image','Link']]
+            Qa_df = pd.DataFrame(Qa_serializ)[['TitleTab','Question','Answer','Image','Link']]
             Qa_dic = Qa_df.to_dict('records')
             tabs['children'][i] = Qa_dic
         tabs = tabs.to_dict('records')
         return response.Response(tabs)
-    
+
+
+
+class ContentComparisonViewSet(viewsets.ModelViewSet):
+    queryset = models.ContentComparison.objects.all()
+    serializer_class = serializer.ContentComparison
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializerz = self.get_serializer(filtered_objects , many = True)
+        tabs = pd.DataFrame(serializerz.data)
+        tabs['children'] = [[] for x in tabs.index]
+        for i in tabs.index:
+            id = tabs['id'][i]
+            Qa_modal = models.ContentComparisonBtn.objects.filter(ContentTabs=id)
+            Qa_serializ = serializer.ContentComparisonBtn(Qa_modal,many = True).data
+            Qa_df = pd.DataFrame(Qa_serializ)[['Title','Description','Image']]
+            Qa_dic = Qa_df.to_dict('records')
+            tabs['children'][i] = Qa_dic
+        tabs = tabs.to_dict('records')
+        return response.Response(tabs)
+
+
+class ContentListViewSet(viewsets.ModelViewSet):
+    queryset = models.ContentList.objects.all()
+    serializer_class = serializer.ContentList
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializerz = self.get_serializer(filtered_objects , many = True)
+        tabs = pd.DataFrame(serializerz.data)
+        tabs['children'] = [[] for x in tabs.index]
+        for i in tabs.index:
+            id = tabs['id'][i]
+            Qa_modal = models.ContentListChild.objects.filter(ContentTabs=id)
+            Qa_serializ = serializer.ContentListChild(Qa_modal,many = True).data
+            Qa_df = pd.DataFrame(Qa_serializ)[['Title','Description','Icon']]
+            Qa_dic = Qa_df.to_dict('records')
+            tabs['children'][i] = Qa_dic
+        tabs = tabs.to_dict('records')
+        return response.Response(tabs)
     
 # News With Grouping
 class NewsWithGroupingViewSet(viewsets.ModelViewSet):

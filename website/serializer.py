@@ -46,6 +46,16 @@ class IntroductionOfCompanies (serializers.ModelSerializer) :
         model = models.IntroductionOfCompanies
         fields = '__all__' 
 
+class ContentList (serializers.ModelSerializer) :
+    class Meta:
+        model = models.ContentList
+        fields = '__all__' 
+
+class ContentListChild (serializers.ModelSerializer) :
+    class Meta:
+        model = models.ContentListChild
+        fields = '__all__' 
+
 class News (serializers.ModelSerializer) :
     class Meta:
         model = models.News
@@ -70,6 +80,16 @@ class QuickAccess (serializers.ModelSerializer) :
 class RelatedLinks (serializers.ModelSerializer) :
     class Meta:
         model = models.RelatedLinks
+        fields = '__all__' 
+
+class ContentComparison (serializers.ModelSerializer) :
+    class Meta:
+        model = models.ContentComparison
+        fields = '__all__' 
+
+class ContentComparisonBtn (serializers.ModelSerializer) :
+    class Meta:
+        model = models.ContentComparisonBtn
         fields = '__all__' 
 
 
