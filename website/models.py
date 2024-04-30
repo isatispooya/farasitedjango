@@ -51,8 +51,8 @@ class Information (models.Model) :
     FieldOfActivity = models.CharField (max_length=255)
     TypeOfCompany = models.CharField (max_length=255)
     class Meta:
-        verbose_name = "اطلاعات پایه"
-        verbose_name_plural = "اطلاعات پایه"
+        verbose_name = "Informations"
+        verbose_name_plural = "Informations"
     def __str__(self):
         return str(self.Domain)
 
@@ -68,12 +68,12 @@ class BranchsOfCompany (models.Model) :
     Code = models.CharField (max_length=5)
     Types = models.CharField (max_length=100)
     class Meta:
-        verbose_name = "شعبه"
-        verbose_name_plural = "شعب"
+        verbose_name = "Branch"
+        verbose_name_plural = "Branchs"
     def __str__(self):
         return str(self.Domain) + ' [' +self.Address+']'
 
-#BusinessPartners
+#Business Partners
 class BusinessPartners (models.Model) :
     Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
@@ -81,8 +81,8 @@ class BusinessPartners (models.Model) :
     Logo =  models.ImageField (upload_to='static/images/')
     Link =  models.CharField (max_length=255)
     class Meta:
-        verbose_name = "شریک تجاری"
-        verbose_name_plural = "شرکای تجاری"
+        verbose_name = "BusinessPartner"
+        verbose_name_plural = "BusinessPartners"
     def __str__(self):
         return str(self.Domain) + '[' +self.Name+']'
 
@@ -98,8 +98,8 @@ class ContactUs (models.Model) :
     Message = models.CharField (max_length=1000)
     route = models.CharField (max_length=255)
     class Meta:
-        verbose_name = "درباره ما"
-        verbose_name_plural = "درباره ما"
+        verbose_name = "Contact Us"
+        verbose_name_plural = "Contact Us Form"
     def __str__(self):
         return str(self.Domain) + '[' +self.Name+' - '+self.Subject +']'
 
@@ -118,8 +118,8 @@ class HistoryOfCompanies (models.Model) :
     Video = models.FileField (upload_to='static/images/' , blank=True, null=True) 
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     class Meta:
-        verbose_name = "رویداد"
-        verbose_name_plural = "تاریخچه"
+        verbose_name = "Event"
+        verbose_name_plural = "History"
     def __str__(self):
         return str(self.Domain) + '[' +self.Date+' - ' +self.Title+'>'
     
@@ -134,8 +134,8 @@ class ProjectProgress (models.Model) :
     Paragraph = models.TextField (blank=True, null=True)
     File = models.FileField (upload_to='static/pdf/' , blank=True, null=True)
     class Meta:
-        verbose_name = "فایل"
-        verbose_name_plural = "پیشرفت پروژه"
+        verbose_name = "File"
+        verbose_name_plural = "Project Progress"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+' - ' +self.Date+'>'
 
@@ -157,8 +157,8 @@ class IntroductionOfCompanies (models.Model) :
     Size = models.IntegerField ()
     Background = ColorField (format="hexa" , default='#FFFFFF')
     class Meta:
-        verbose_name = "شرکت"
-        verbose_name_plural = "شرکت ها"
+        verbose_name = "Company"
+        verbose_name_plural = "Companies"
     def __str__(self):
         return str(self.Domain) + '['+self.Name+']'
 
@@ -168,8 +168,8 @@ class TypeOfContent (models.Model) :
     CreateAt = models.DateTimeField (default=now)
     Title = models.CharField (max_length=300)
     class Meta:
-        verbose_name = "دسته"
-        verbose_name_plural = "دسته بندی"
+        verbose_name = "Type"
+        verbose_name_plural = "Type Of Content"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -180,8 +180,8 @@ class ContentTabs (models.Model) :
     Title = models.TextField ()
     Description = models.TextField (blank=True, null=True)
     class Meta:
-        verbose_name = "محتوا"
-        verbose_name_plural = "محتوای تب ها"
+        verbose_name = "Content"
+        verbose_name_plural = "Content Tabs"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -194,8 +194,8 @@ class QaOfContentTabs(models.Model):
     Image = models.ImageField(upload_to='static/images/')
     Link = models.CharField(max_length=150)
     class Meta:
-        verbose_name = "سوال و جواب تب"
-        verbose_name_plural = "سوالات و جواب های تب"
+        verbose_name = "QA"
+        verbose_name_plural = "QA Of Content Tabs"
 
     def __str__(self):
         return str(self.ContentTabs) + '[' + self.Question + ']'
@@ -210,8 +210,8 @@ class Grouping (models.Model) :
     Icone = models.ImageField (upload_to='static/images/')
     Url = models.CharField (max_length=255)
     class Meta:
-        verbose_name = "گروه"
-        verbose_name_plural = "گروه بندی"
+        verbose_name = "Group"
+        verbose_name_plural = "Grouping"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -227,8 +227,8 @@ class News (models.Model) :
     route = models.CharField (max_length=255)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     class Meta:
-        verbose_name = "مقاله"
-        verbose_name_plural = "مقالات"
+        verbose_name = "New"
+        verbose_name_plural = "News"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -243,8 +243,8 @@ class Products (models.Model) :
     route = models.CharField (max_length=255)
     AdditionalImages = models.ImageField (upload_to='static/images/',blank=True, null=True)
     class Meta:
-        verbose_name = "محصول"
-        verbose_name_plural = "محصولات"
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -256,8 +256,8 @@ class Questions (models.Model) :
     Question = models.CharField (max_length=500)
     Answer = models.TextField ()
     class Meta:
-        verbose_name = "سوال و جواب"
-        verbose_name_plural = "سوالات پر تکرار"
+        verbose_name = "Questions & Answer"
+        verbose_name_plural = "Questions"
     def __str__(self):
         return str(self.Domain) + '[' +self.Question+']'
 
@@ -270,8 +270,8 @@ class QuickAccess (models.Model) :
     Picture = models.ImageField (upload_to='static/images/')
     Title = models.CharField (max_length=500)
     class Meta:
-        verbose_name = "لینک"
-        verbose_name_plural = "دسترسی سریع"
+        verbose_name = "Links"
+        verbose_name_plural = "QuickAccess"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -289,8 +289,8 @@ class Menu (models.Model) :
     Link = models.CharField (max_length=255)
     Icon = models.ImageField (upload_to='static/images/' , blank=True , null=True)
     class Meta:
-        verbose_name = "لینک"
-        verbose_name_plural = "منو"
+        verbose_name = "Links"
+        verbose_name_plural = "Menu"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -304,8 +304,8 @@ class RelatedLinks (models.Model) :
     Title = models.CharField (max_length=300)
     Link = models.CharField (max_length=255)
     class Meta:
-        verbose_name = "لینک"
-        verbose_name_plural = "لینک های مرتبط"
+        verbose_name = "Links"
+        verbose_name_plural = "Related Links"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -321,8 +321,8 @@ class Slider (models.Model) :
     Title = models.CharField (max_length=300)
     Alt = models.CharField (max_length=300)
     class Meta:
-        verbose_name = "اسلاید"
-        verbose_name_plural = "اسلاید شو"
+        verbose_name = "Slide"
+        verbose_name_plural = "Slider"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -335,8 +335,8 @@ class Statistics (models.Model) :
     Number = models.CharField (max_length=300)
     Icon = models.ImageField (upload_to='static/images/' , blank=True, null=True)
     class Meta:
-        verbose_name = "امار"
-        verbose_name_plural = "آمار و ارقام"
+        verbose_name = "Statistics"
+        verbose_name_plural = "Statistics"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -351,8 +351,8 @@ class SubjectSubscription (models.Model) :
     CreateAt = models.DateTimeField (default=now)
     Title = models.CharField (max_length=300)
     class Meta:
-        verbose_name = "موضوع"
-        verbose_name_plural = "موضوعات مشترک شدن"
+        verbose_name = "Subject"
+        verbose_name_plural = "Subject Subscription"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -371,8 +371,8 @@ class Subscription (models.Model) :
     Subject = models.CharField (max_length=300)
     Telephone = models.CharField (max_length=12)
     class Meta:
-        verbose_name = "اشتراک"
-        verbose_name_plural = "مشترکین"
+        verbose_name = "Sub"
+        verbose_name_plural = "Subscription"
     def __str__(self):
         return str(self.Domain) + '[' + self.Subject + ' - ' + self.Telephone + ']'
 
@@ -388,8 +388,8 @@ class GalleryPhoto (models.Model) :
 
     class Meta:
         ordering = ['-CreateAt']
-        verbose_name = "تصویر"
-        verbose_name_plural = "گالری تصویر"
+        verbose_name = "Photo"
+        verbose_name_plural = "Gallery Photo"
     def __str__(self):
         return str(self.Domain) + '[' +self.Alt+']'
 
@@ -403,8 +403,8 @@ class GalleryVideo (models.Model) :
     Alt = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     class Meta:
-        verbose_name = "ویدئو"
-        verbose_name_plural = "گالری ویدئو"
+        verbose_name = "Video"
+        verbose_name_plural = "Gallery Video"
     def __str__(self):
         return str(self.Domain) + '[' +self.Alt+']'
 
@@ -419,8 +419,8 @@ class positionofmanagers (models.Model) :
     Senior = models.CharField (max_length=300, blank=True , null= True)
     Level = models.IntegerField ()
     class Meta:
-        verbose_name = "موقعیت"
-        verbose_name_plural = "موقعیت مدیریتی"
+        verbose_name = "Position"
+        verbose_name_plural = "Position Of Managers"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 
@@ -438,8 +438,8 @@ class ManagersPeople (models.Model) :
     Email = models.CharField (max_length=300)
     Picture =models.ImageField (upload_to='static/images/')
     class Meta:
-        verbose_name = "مدیر"
-        verbose_name_plural = "مدیران"
+        verbose_name = "Manager"
+        verbose_name_plural = "Managers"
     def __str__(self):
         return str(self.Position) + '[' +self.Title+ ' - ' + self.Name +']'
 
