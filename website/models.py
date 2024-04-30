@@ -189,6 +189,7 @@ class ContentTabs (models.Model) :
 class QaOfContentTabs(models.Model):
     ContentTabs = models.ForeignKey(ContentTabs, on_delete=models.CASCADE)
     CreateAt = models.DateTimeField(default=now)
+    TitleTab = models.CharField(max_length=80)
     Question = models.TextField()
     Answer = models.TextField(blank=True, null=True)
     Image = models.ImageField(upload_to='static/images/')
@@ -200,6 +201,58 @@ class QaOfContentTabs(models.Model):
     def __str__(self):
         return str(self.ContentTabs) + '[' + self.Question + ']'
 
+
+#Content Tabs
+class ContentComparison (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
+    Title = models.TextField ()
+    Description = models.TextField (blank=True, null=True)
+    class Meta:
+        verbose_name = "محتوا مقایسه"
+        verbose_name_plural = "محتوای های مقایسه"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
+
+class ContentComparisonBtn(models.Model):
+    ContentTabs = models.ForeignKey(ContentComparison, on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField(default=now)
+    Title = models.TextField()
+    Description = models.TextField(blank=True, null=True)
+    Image = models.ImageField(upload_to='static/images/')
+    class Meta:
+        verbose_name = "محتوای مقایسه بخش"
+        verbose_name_plural = "محتوای مقایسه بخش ها"
+    def __str__(self):
+        return str(self.ContentTabs) + '[' + self.Title + ']'
+    
+
+
+#Content Tabs
+class ContentList (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
+    Title = models.TextField ()
+    Description = models.TextField (blank=True, null=True)
+    Image = models.ImageField(upload_to='static/images/')
+    class Meta:
+        verbose_name = "محتوا لیست"
+        verbose_name_plural = "محتوای های لیست"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
+
+class ContentListChild(models.Model):
+    ContentTabs = models.ForeignKey(ContentList, on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField(default=now)
+    Title = models.TextField()
+    Description = models.TextField(blank=True, null=True)
+    Icon = models.ImageField(upload_to='static/images/')
+    class Meta:
+        verbose_name = "محتوای های لیست فرزند"
+        verbose_name_plural = "محتوای های لیست فرزند ها"
+    def __str__(self):
+        return str(self.ContentTabs) + '[' + self.Title + ']'
+    
 
 
 #Grouping 

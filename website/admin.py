@@ -33,5 +33,9 @@ admin.site.register(models.ManagersPeople)
 admin.site.register(models.Menu)
 admin.site.register(models.ContentTabs)
 admin.site.register(models.QaOfContentTabs)
+admin.site.register(models.ContentComparison)
+admin.site.register(models.ContentComparisonBtn)
+admin.site.register(models.ContentList)
+admin.site.register(models.ContentListChild)
 
 

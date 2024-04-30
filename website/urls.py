@@ -32,6 +32,8 @@ router.register(viewset=views.NewsWithGroupingViewSet ,prefix='newswithgrouping'
 router.register(viewset=views.ChartViewSet ,prefix='chart',basename='chart')
 router.register(viewset=views.MenuViewSet ,prefix='Menu',basename='Menu')
 router.register(viewset=views.ContentTabsViewSet ,prefix='ContentTabs',basename='ContentTabs')
+router.register(viewset=views.ContentComparisonViewSet ,prefix='ContentComparison',basename='ContentComparison')
+router.register(viewset=views.ContentListViewSet ,prefix='ContentList',basename='ContentList')
 
 
 
