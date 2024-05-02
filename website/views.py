@@ -431,14 +431,14 @@ class ChartViewSet(viewsets.ModelViewSet):
         df_root = df[df['Senior']=='NoSenior']
         dff = pd.DataFrame(serializer_ManagersPeople.data)
 
+
         result = []
 
-
         for i in df_root.index:
-            pos = df['Title'][i]
+            pos = df['id'][i]
+            posName = df[df['id']==pos].to_dict('records')[0]['Title']
             personal = dff[dff['Position'] == pos].to_dict('records')
-            poss_child = list(set(df[df['Senior']== pos]['Title']))
-   
+            poss_child = list(set(df[df['Senior']== posName]['Title']))
             child = []
             for j in poss_child:
                 personal_child = dff[dff['Position'] == j].to_dict('records')
