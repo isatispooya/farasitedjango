@@ -135,8 +135,9 @@ class NewsViewSet(viewsets.ModelViewSet):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        filtered_objects = self.get_queryset().filter(Domain=Domain , show = True)
         serializer = self.get_serializer(filtered_objects , many = True)
+
 
         return response.Response(serializer.data)
     
@@ -465,10 +466,19 @@ class MenuViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects , many=True)
         df = pd.DataFrame(serializer.data)
+        df = df.sort_values(by="Sort",ascending=False)
+
         result = []
         for i in list ( set (df['MegaMenu'])) :
-            SubMenu = df[df['MegaMenu']== i ].to_dict ("records")
-            result.append ({'MegaMenu':i,'SubMenu':SubMenu})
+            SubMenu = df[df['MegaMenu']== i ]
+            MegaSort = SubMenu['Sort'].mean()
+            SubMenu = SubMenu.to_dict ("records")
+
+            result.append ({'MegaMenu':i,'MegaSort' : MegaSort ,'SubMenu':SubMenu})
+        
+        result = pd.DataFrame(result).sort_values('MegaSort',ascending=False)
+        result = result.to_dict('records')
+
 
 
         return response.Response(result)

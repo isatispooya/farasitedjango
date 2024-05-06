@@ -285,6 +285,7 @@ class News (models.Model) :
     Title = models.CharField (max_length=500)
     ShortDescription = models.CharField (max_length=700)
     route = models.CharField (max_length=255)
+    show = models.BooleanField (default=True)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     class Meta:
         verbose_name = "New"
@@ -343,6 +344,7 @@ class Menu (models.Model) :
     MegaMenu = models.CharField (max_length=255)
     Title = models.CharField (max_length=500)
     Link = models.CharField (max_length=255)
+    Sort = models.IntegerField (max_length=255)
     Icon = models.ImageField (upload_to='static/images/' , blank=True , null=True)
     class Meta:
         verbose_name = "Links"
