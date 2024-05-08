@@ -344,7 +344,7 @@ class Menu (models.Model) :
     MegaMenu = models.CharField (max_length=255)
     Title = models.CharField (max_length=500)
     Link = models.CharField (max_length=255)
-    Sort = models.IntegerField (max_length=255)
+    Sort = models.IntegerField ()
     Icon = models.ImageField (upload_to='static/images/' , blank=True , null=True)
     class Meta:
         verbose_name = "Links"
@@ -476,6 +476,22 @@ class ManagersPeople (models.Model) :
         verbose_name_plural = "Managers"
     def __str__(self):
         return str(self.Position) + '[' +self.Title+ ' - ' + self.Name +']'
+
+
+#Live 
+class Live (models.Model) :
+    CreateAt = models.DateTimeField (default=now)
+    Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
+    Title = models.CharField (max_length=255)
+    StreamUrl = models.CharField (max_length=500)
+    StreamKey = models.CharField (max_length=500)
+    Url = models.CharField (max_length=255)
+    class Meta:
+        verbose_name = "Live"
+        verbose_name_plural = "Live"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
+
 
 
 # Email

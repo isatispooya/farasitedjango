@@ -37,5 +37,6 @@ admin.site.register(models.ContentComparison)
 admin.site.register(models.ContentComparisonBtn)
 admin.site.register(models.ContentList)
 admin.site.register(models.ContentListChild)
+admin.site.register(models.Live)
 
 

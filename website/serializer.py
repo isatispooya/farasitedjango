@@ -195,5 +195,12 @@ class ReceiveEmail (serializers.ModelSerializer) :
 
 
 
+class Live (serializers.ModelSerializer) :
+    class Meta:
+        model = models.Live
+        fields = '__all__' 
+
+
+
 
 
