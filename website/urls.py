@@ -40,4 +40,5 @@ router.register(viewset=views.LiveViewSet ,prefix='live',basename='live')
 
 urlpatterns = [
     path('', include(router.urls)),
+
 ]

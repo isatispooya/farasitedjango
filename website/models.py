@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from colorfield.fields import ColorField
 from django.utils.timezone import now
+from django_summernote.fields import SummernoteTextField
 
 
 class Domain(models.Model):
@@ -279,7 +280,7 @@ class Grouping (models.Model) :
 class News (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
-    Content = models.TextField ()
+    Content = SummernoteTextField()
     KeyWord = models.CharField (max_length=500)
     Grouping = models.ForeignKey(Grouping, on_delete=models.CASCADE)
     Title = models.CharField (max_length=500)
@@ -486,9 +487,25 @@ class Live (models.Model) :
     StreamUrl = models.CharField (max_length=500)
     StreamKey = models.CharField (max_length=500)
     Url = models.CharField (max_length=255)
+    Play = models.CharField (max_length=1000)
     class Meta:
         verbose_name = "Live"
         verbose_name_plural = "Live"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
+
+
+
+
+
+#Get File 
+class GetFile (models.Model) :
+    CreateAt = models.DateTimeField (default=now)
+    File = models.FileField(upload_to='static/images/')
+
+    class Meta:
+        verbose_name = "GetFile"
+        verbose_name_plural = "GetFile"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
 

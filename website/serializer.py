@@ -204,3 +204,12 @@ class Live (serializers.ModelSerializer) :
 
 
 
+class Live (serializers.ModelSerializer) :
+    class Meta:
+        model = models.GetFile
+        fields = '__all__' 
+
+
+
+
+
