@@ -276,6 +276,7 @@ class Grouping (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
+
 # News
 class News (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)

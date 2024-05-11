@@ -1,5 +1,15 @@
 from django.contrib import admin
 from . import models
+from django import forms
+from django_summernote.widgets import SummernoteWidget
+from .models import News
+
+class PostForm(forms.ModelForm):
+    content = forms.CharField(widget=SummernoteWidget())
+
+    class Meta:
+        model = News
+        fields = '__all__'
 
 
 
