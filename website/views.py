@@ -216,10 +216,12 @@ class ContentListViewSet(viewsets.ModelViewSet):
         return response.Response(tabs)
 
 
-# News With Grouping
+
+
 class NewsWithGroupingViewSet(viewsets.ModelViewSet):
     queryset = models.News.objects.all()
     serializer_class = serializer.News
+    
     def list(self, request):
         Domain = request.query_params.get('Domain')
         grouping = request.query_params.get('grouping')
@@ -227,15 +229,22 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         if grouping is None:
             raise serializers.ValidationError('Parameter "grouping" is required.')
-        grouping_instance = get_object_or_404(models.Grouping, Title=grouping)
-        filtered_objects = self.get_queryset().filter(Domain=Domain , Grouping = grouping_instance.id )
-        serializer = self.get_serializer(filtered_objects , many = True)
+        
+        grouping_instances = models.Grouping.objects.filter(Title=grouping)
+        if not grouping_instances.exists():
+            raise serializers.ValidationError('Grouping with specified title does not exist.')
+        
+        # Use first() to get the first instance if there are multiple instances
+        grouping_instance = grouping_instances.first()
+        
+        filtered_objects = self.get_queryset().filter(Domain=Domain, Grouping=grouping_instance.id,show=True)
+        serializer = self.get_serializer(filtered_objects, many=True)
+        
         for item in serializer.data:
-            grouping_id = item['Grouping']
-            grouping_instance = get_object_or_404(models.Grouping, id=grouping_id)
             item['Grouping'] = grouping_instance.Title
         
         return response.Response(serializer.data)
+
 
 # News With Rout
 class NewsWithRoutViewSet(viewsets.ModelViewSet):
@@ -248,8 +257,10 @@ class NewsWithRoutViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         if route is None:
             raise serializers.ValidationError('Parameter "route" is required.')
+
         filtered_objects = self.get_queryset().filter(Domain=Domain , route = route).last()
         serializer = self.get_serializer(filtered_objects)
+        serializer.data['Grouping'] = filtered_objects.Grouping.Title
         return response.Response(serializer.data)
     
 
