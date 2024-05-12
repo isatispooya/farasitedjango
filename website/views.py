@@ -227,12 +227,16 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         if grouping is None:
             raise serializers.ValidationError('Parameter "grouping" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain , Grouping = grouping )
+        grouping_instance = get_object_or_404(models.Grouping, Title=grouping)
+        filtered_objects = self.get_queryset().filter(Domain=Domain , Grouping = grouping_instance.id )
         serializer = self.get_serializer(filtered_objects , many = True)
+        for item in serializer.data:
+            grouping_id = item['Grouping']
+            grouping_instance = get_object_or_404(models.Grouping, id=grouping_id)
+            item['Grouping'] = grouping_instance.Title
+        
         return response.Response(serializer.data)
-    
-  
-    
+
 # News With Rout
 class NewsWithRoutViewSet(viewsets.ModelViewSet):
     queryset = models.News.objects.all()

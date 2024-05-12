@@ -173,8 +173,8 @@ EMAIL_USE_TLS=True
 
 
 SUMMERNOTE_CONFIG = {
-    'width': '100%',
-    'height': '480',
+    'width': '800',
+    'height': '600',
     'toolbar': [
         ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'clear']],
