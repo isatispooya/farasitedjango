@@ -301,7 +301,7 @@ class Products (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
     Picture =models.ImageField (upload_to='static/images/')
-    Paragraph = models.TextField ()
+    Paragraph = SummernoteTextField()
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     AdditionalImages = models.ImageField (upload_to='static/images/',blank=True, null=True)
