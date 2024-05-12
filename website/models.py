@@ -152,7 +152,7 @@ class IntroductionOfCompanies (models.Model) :
     Link =models.CharField (max_length=255)
     Telephone = models.CharField (max_length=12)
     Address = models.CharField (max_length=500)
-    ShortAboutUs = models.TextField (max_length=80)
+    ShortAboutUs = models.TextField (max_length=150)
     LongAboutUs = models.TextField ( blank=True, null=True)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     SubName =models.CharField (max_length=255,blank=True, null=True)
