@@ -460,9 +460,6 @@ class ChartViewSet(viewsets.ModelViewSet):
             poss_child = list(set(df[df['Senior']== posName]['id']))
             child = []
             for j in poss_child:
-
-                print(j)
-                print(dff)
                 personal_child = dff[dff['Position'] == j].to_dict('records')
                 child_dic = {'pos':j, 'personal':personal_child}
                 child.append(child_dic)
