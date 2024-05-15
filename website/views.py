@@ -110,20 +110,21 @@ class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
         df = pd.DataFrame(serializer.data)
         if len(df)==0:
             return response.Response([])
-
+        df ['Sort'] = df ['Sort'].fillna(randint(100,200))
         df = df.sample(frac=1).reset_index(drop=True)
         df = df[df.index<=20]
         df['Size']= [randint(1,3) for x in df.index]
-        while df['Size'].sum () != 24 :
-            inx = randint(0,df.index.max()*1)
-            sumsize = df['Size'].sum ()
-            Size = df['Size'][inx]
-            Increase = sumsize < 24 
-            Decrease = sumsize > 24
-            if Increase and  Size < 3 :
-                df['Size'][inx] = Size+1
-            elif Decrease and Size > 1 :
-                df['Size'][inx] = Size-1
+        # while df['Size'].sum () != 24 :
+        #     inx = randint(0,df.index.max()*1)
+        #     sumsize = df['Size'].sum ()
+        #     Size = df['Size'][inx]
+        #     Increase = sumsize < 24 
+        #     Decrease = sumsize > 24
+        #     if Increase and  Size < 3 :
+        #         df['Size'][inx] = Size+1
+        #     elif Decrease and Size > 1 :
+        #         df['Size'][inx] = Size-1
+        df = df.sort_values(by='Sort')
         df = df.to_dict('records')
         return response.Response(df)
     
