@@ -99,7 +99,6 @@ class ContactUs (models.Model) :
     Phonenumber = models.CharField (max_length=12,blank=True, null=True)
     Subject = models.CharField (max_length=200)
     Message = models.CharField (max_length=1000)
-    route = models.CharField (max_length=255)
     class Meta:
         verbose_name = "Contact Us"
         verbose_name_plural = "Contact Us Form"

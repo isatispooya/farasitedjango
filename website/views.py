@@ -48,13 +48,30 @@ class BusinessPartnersViewSet(viewsets.ModelViewSet):
 class ContactUsViewSet(viewsets.ModelViewSet):
     queryset = models.ContactUs.objects.all()
     serializer_class = serializer.ContactUs
-    def list(self, request):
+    def create(self, request):
         Domain = request.query_params.get('Domain')
+        Name = request.data.get('Name')
+        Email = request.data.get('Email')
+        Phonenumber = request.data.get('Phonenumber')
+        Subject = request.data.get('Subject')
+        Message = request.data.get('Message')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain).last()
-        serializer = self.get_serializer(filtered_objects)
-        return response.Response(serializer.data)
+        Doimain_instances = models.Domain.objects.filter(domain=Domain)
+        domain_instance = Doimain_instances.first()
+        if not Doimain_instances.exists():
+            raise serializers.ValidationError('Domain with specified title does not exist.')
+        form = models.ContactUs(
+            Domain=domain_instance,
+            CreateAt=datetime.datetime.now(),
+            Name=Name,
+            Email=Email,
+            Phonenumber=Phonenumber,
+            Subject=Subject,
+            Message=Message
+            )
+        form.save()
+        return response.Response({"success": True})
     
     
 # Grouping
@@ -348,10 +365,8 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
 
 # Subscription  
 class SubscriptionViewSet(viewsets.ModelViewSet):
-
     queryset = models.Subscription.objects.all()
     serializer_class = serializer.Subscription
-
     def create(self, request, *args, **kwargs):
         Domain = request.data.get('Domain')
         Telephone = request.data.get('Telephone')
@@ -359,9 +374,12 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         CreateAt = datetime.datetime.now()
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        subscription = models.Subscription(Domain=Domain, Telephone=Telephone, Subject=Subject, CreateAt=CreateAt)
+        Doimain_instances = models.Domain.objects.filter(domain=Domain)
+        domain_instance = Doimain_instances.first()
+        if not Doimain_instances.exists():
+            raise serializers.ValidationError('Domain with specified title does not exist.')
+        subscription = models.Subscription(Domain=domain_instance, Telephone=Telephone, Subject=Subject, CreateAt=CreateAt)
         subscription.save()
-
         return response.Response({"success": True})
 
     
