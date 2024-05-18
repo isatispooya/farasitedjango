@@ -113,6 +113,8 @@ class ProjectProgressViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many = True)
         return response.Response(serializer.data)
     
+
+
     
 # Introduction Of Companies
 class IntroductionOfCompaniesViewSet(viewsets.ModelViewSet):
@@ -286,6 +288,21 @@ class NewsWithRoutViewSet(viewsets.ModelViewSet):
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = models.Products.objects.all()
     serializer_class = serializer.Products
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many = True)
+        return response.Response(serializer.data)
+    
+
+    
+
+# Product Name
+class ProductNameViewSet(viewsets.ModelViewSet):
+    queryset = models.ProductName.objects.all()
+    serializer_class = serializer.ProductName
     def list(self, request):
         Domain = request.query_params.get('Domain')
         if Domain is None:

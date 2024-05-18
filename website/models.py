@@ -41,6 +41,7 @@ class Information (models.Model) :
     Theme = models.IntegerField (blank=True, null=True)
     MapLink = models.CharField (max_length=255)
     Email = models.EmailField (max_length=255,blank=True, null=True)
+    CodalLink = models.CharField (max_length=255,blank=True, null=True)
     instagram = models.CharField (max_length=255,blank=True, null=True)
     telegram =models.CharField (max_length=255,blank=True, null=True)
     tweeter = models.CharField (max_length=255,blank=True, null=True)
@@ -132,8 +133,7 @@ class ProjectProgress (models.Model) :
     CreateAt = models.DateTimeField (default=now)
     Date = models.CharField (max_length=12)
     Title = models.CharField (max_length=255)
-    Paragraph = models.TextField (blank=True, null=True)
-    File = models.FileField (upload_to='static/pdf/' , blank=True, null=True)
+    File = models.FileField (upload_to='static/pdf/')
     class Meta:
         verbose_name = "File"
         verbose_name_plural = "Project Progress"
@@ -310,6 +310,19 @@ class Products (models.Model) :
         verbose_name_plural = "Products"
     def __str__(self):
         return str(self.Domain) + '[' +self.Title+']'
+
+
+
+#Product Name
+class ProductName (models.Model):
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    Name = models.CharField (max_length=255 , default='محصولات')
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "ProductName"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
+
 
 
 #Questions

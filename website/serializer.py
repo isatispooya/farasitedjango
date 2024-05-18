@@ -213,3 +213,14 @@ class Live (serializers.ModelSerializer) :
 
 
 
+
+
+class ProductName (serializers.ModelSerializer) :
+    class Meta:
+        model = models.GetFile
+        fields = '__all__' 
+
+
+
+
+

@@ -35,6 +35,7 @@ router.register(viewset=views.ContentTabsViewSet ,prefix='ContentTabs',basename=
 router.register(viewset=views.ContentComparisonViewSet ,prefix='ContentComparison',basename='ContentComparison')
 router.register(viewset=views.ContentListViewSet ,prefix='ContentList',basename='ContentList')
 router.register(viewset=views.LiveViewSet ,prefix='live',basename='live')
+router.register(viewset=views.ProductNameViewSet ,prefix='productname',basename='productname')
 
 
 
