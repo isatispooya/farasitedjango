@@ -316,6 +316,7 @@ class Products (models.Model) :
 #Product Name
 class ProductName (models.Model):
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    Link = models.CharField(max_length=255)
     Name = models.CharField (max_length=255 , default='محصولات')
     class Meta:
         verbose_name = "Product"
