@@ -267,7 +267,7 @@ class Grouping (models.Model) :
     CreateAt = models.DateTimeField (default=now)
     Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
     Title = models.CharField (max_length=255)
-    Icone = models.ImageField (upload_to='static/images/')
+    Icone = models.ImageField (upload_to='static/images/',blank=True , null=True)
     Url = models.CharField (max_length=255)
     class Meta:
         verbose_name = "Group"
