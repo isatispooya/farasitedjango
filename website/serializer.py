@@ -217,7 +217,17 @@ class Live (serializers.ModelSerializer) :
 
 class ProductName (serializers.ModelSerializer) :
     class Meta:
-        model = models.GetFile
+        model = models.ProductName
+        fields = '__all__' 
+
+
+
+
+
+
+class SocialResponsibility (serializers.ModelSerializer) :
+    class Meta:
+        model = models.SocialResponsibility
         fields = '__all__' 
 
 

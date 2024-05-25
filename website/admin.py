@@ -50,5 +50,6 @@ admin.site.register(models.ContentListChild)
 admin.site.register(models.Live)
 admin.site.register(models.GetFile)
 admin.site.register(models.ProductName)
+admin.site.register(models.SocialResponsibility)
 
 

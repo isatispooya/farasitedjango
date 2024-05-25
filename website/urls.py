@@ -36,6 +36,7 @@ router.register(viewset=views.ContentComparisonViewSet ,prefix='ContentCompariso
 router.register(viewset=views.ContentListViewSet ,prefix='ContentList',basename='ContentList')
 router.register(viewset=views.LiveViewSet ,prefix='live',basename='live')
 router.register(viewset=views.ProductNameViewSet ,prefix='productname',basename='productname')
+router.register(viewset=views.SocialResponsibilityViewSet ,prefix='SocialResponsibility',basename='SocialResponsibility')
 
 
 

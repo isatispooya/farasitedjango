@@ -296,6 +296,22 @@ class News (models.Model) :
         return str(self.Domain) + '[' +self.Title+']'
 
 
+
+
+# Social Responsibility
+class SocialResponsibility (models.Model) :
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    CreateAt = models.DateTimeField (default=now)
+    Content = SummernoteTextField()
+    Title = models.CharField (max_length=500)
+    Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
+    class Meta:
+        verbose_name = "Responsibility"
+        verbose_name_plural = "Responsibility"
+    def __str__(self):
+        return str(self.Domain) + '[' +self.Title+']'
+
+
 #Products
 class Products (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
@@ -321,7 +337,7 @@ class ProductName (models.Model):
         verbose_name = "Product"
         verbose_name_plural = "ProductName"
     def __str__(self):
-        return str(self.Domain) + '[' +self.Title+']'
+        return str(self.Domain) + '[' +self.Name+']'
 
 
 

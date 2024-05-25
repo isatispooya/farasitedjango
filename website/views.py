@@ -86,6 +86,20 @@ class GroupingViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(filtered_objects , many=True)
         return response.Response(serializer.data)
 
+    
+    
+# Social Responsibility
+class SocialResponsibilityViewSet(viewsets.ModelViewSet):
+    queryset = models.SocialResponsibility.objects.all()
+    serializer_class = serializer.SocialResponsibility
+    def list(self, request):
+        Domain = request.query_params.get('Domain')
+        if Domain is None:
+            raise serializers.ValidationError('Parameter "Domain" is required.')
+        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
+        serializer = self.get_serializer(filtered_objects , many=True)
+        return response.Response(serializer.data)
+
 
 # History Of Companies
 class HistoryOfCompaniesViewSet(viewsets.ModelViewSet):
