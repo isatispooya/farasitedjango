@@ -532,6 +532,10 @@ class Live (models.Model) :
 class GetFile (models.Model) :
     CreateAt = models.DateTimeField (default=now)
     File = models.FileField(upload_to='static/images/')
+    Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
+    Title = models.CharField (max_length=255)
+
+
 
     class Meta:
         verbose_name = "GetFile"
