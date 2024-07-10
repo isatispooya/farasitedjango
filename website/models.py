@@ -511,19 +511,22 @@ class ManagersPeople (models.Model) :
 
 
 #Live 
-class Live (models.Model) :
-    CreateAt = models.DateTimeField (default=now)
-    Domain =  models.ForeignKey(Domain, on_delete=models.CASCADE)
-    Title = models.CharField (max_length=255)
-    StreamUrl = models.CharField (max_length=500)
-    StreamKey = models.CharField (max_length=500)
-    Url = models.CharField (max_length=255)
-    Play = models.CharField (max_length=1000)
+class Live(models.Model):
+    CreateAt = models.DateTimeField(default=now)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    Title = models.CharField(max_length=255)
+    StreamUrl = models.CharField(max_length=500)
+    StreamKey = models.CharField(max_length=500)
+    Url = models.CharField(max_length=255)
+    Play = models.CharField(max_length=1000)
+
     class Meta:
         verbose_name = "Live"
         verbose_name_plural = "Live"
+
     def __str__(self):
-        return str(self.Domain) + '[' +self.Title+']'
+        return str(self.Domain) + '[' + self.Title + ']'
+
 
 
 

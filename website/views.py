@@ -560,19 +560,17 @@ class MenuViewSet(viewsets.ModelViewSet):
 # Live
 class LiveViewSet(viewsets.ModelViewSet):
     queryset = models.Live.objects.all()
-    serializer_class = serializer.Live
+    serializer_class = serializer.LiveSerializer
+
     def list(self, request):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
-        serializer = self.get_serializer(filtered_objects , many=True)
+        filtered_objects = self.get_queryset().filter(Domain=Domain)
+        serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
-    
-       
-   
+
   
-       
 # Email
 class EmailViewSet(viewsets.ModelViewSet):
     queryset = models.Email.objects.all()
