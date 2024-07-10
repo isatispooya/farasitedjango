@@ -14,13 +14,14 @@ class SubSuperMenu(models.Model):
         ('لینک', 'link'),
     )
     type = models.CharField(max_length=12, choices=TYPE_CHOICES)
+    description = models.CharField(max_length=300,blank=True,null=True)
     def __str__(self) -> str:
         return f'{self.title} {self.url}'
 
 class SuperMenu(models.Model):
     domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
-    vector = models.ImageField (upload_to='static/images/')
+    vector = models.ImageField (upload_to='static/images/', blank=True,null = True)
     sub = models.ManyToManyField(SubSuperMenu,blank=True,null=True)
     TYPE_CHOICES = (
         ('کشویی', 'dropdown'),
