@@ -72,7 +72,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'colorfield',
     'django_summernote',
-    'menu'
+    'menu',
+    'structure'
 ]
 
 MIDDLEWARE = [
