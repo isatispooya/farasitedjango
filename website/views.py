@@ -266,7 +266,7 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
         
         # grouping_instances = models.Grouping.objects.all()
         grouping_instances = models.Grouping.objects.filter(Title__icontains=grouping )
-        grouping_instances = serializer.Grouping
+        
         print(grouping_instances)
         if not grouping_instances.exists():
             raise serializers.ValidationError('Grouping with specified title does not exist.')
