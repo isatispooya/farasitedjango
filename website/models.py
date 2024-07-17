@@ -585,3 +585,11 @@ class ReceiveEmail (models.Model) :
     Body = models.CharField (max_length=10000)
     Subject = models.CharField (max_length=300)
     CreateAt = models.DateTimeField (default=now)
+
+# Super Product
+class SuperProduct(models.Model):
+    Title = models.CharField(max_length=200)
+    Image = models.FileField(upload_to='static/images/')
+    Description = models.CharField(max_length=300)
+    Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
+    # Super_Product = models.ForeignKey(SubSuperProduct,on_delete=models.CASCADE)

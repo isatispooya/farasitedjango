@@ -232,6 +232,9 @@ class SocialResponsibility (serializers.ModelSerializer) :
         fields = '__all__' 
 
 
+    
+
+
 
 
 
