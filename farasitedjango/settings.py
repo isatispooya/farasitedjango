@@ -73,7 +73,8 @@ INSTALLED_APPS = [
     'colorfield',
     'django_summernote',
     'menu',
-    'structure'
+    'structure',
+    'superproduct'
 ]
 
 MIDDLEWARE = [

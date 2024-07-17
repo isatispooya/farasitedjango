@@ -53,3 +53,4 @@ admin.site.register(models.ProductName)
 admin.site.register(models.SocialResponsibility)
 
 
+
