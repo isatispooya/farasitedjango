@@ -1,9 +1,9 @@
 from django.urls import path, include
 from . import views
-from website.urls import routers
+from website.urls import router
 
 
-router = routers.DefaultRouter()
+
 
 router.register(viewset=views.SuperProductViewset ,prefix='superproduct',basename='superproduct')
 

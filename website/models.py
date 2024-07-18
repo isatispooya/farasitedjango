@@ -440,6 +440,7 @@ class SubjectSubscription (models.Model) :
 
 #Subscription
 class Subscription (models.Model) :
+    Name = models.CharField(max_length= 100, blank=True, null=True)
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
     Subject = models.CharField (max_length=300)
