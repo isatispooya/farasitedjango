@@ -28,7 +28,7 @@ class ContactUs (serializers.ModelSerializer) :
 class Grouping (serializers.ModelSerializer) :
     class Meta:
         model = models.Grouping
-        fields = '__all__' 
+        fields = ['id', 'Title']
 
 class HistoryOfCompanies (serializers.ModelSerializer) :
     class Meta:
@@ -57,6 +57,10 @@ class ContentListChild (serializers.ModelSerializer) :
         fields = '__all__' 
 
 class News (serializers.ModelSerializer) :
+    Grouping = serializers.SlugRelatedField(
+    slug_field='id',
+    queryset=models.Grouping.objects.all()
+)
     class Meta:
         model = models.News
         fields = '__all__' 

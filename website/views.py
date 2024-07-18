@@ -175,9 +175,14 @@ class NewsViewSet(viewsets.ModelViewSet):
         for item in serializer.data:
             grouping_id = item['Grouping']
             grouping_instance = get_object_or_404(models.Grouping, id=grouping_id)
-            item['Grouping'] = grouping_instance.Title
+            item['Grouping_id'] = grouping_instance.id
+            item['Grouping_Title'] = grouping_instance.Title
+           
+
+            
         return response.Response(serializer.data)
-    
+
+
 
 # Content Tabs
 class ContentTabsViewSet(viewsets.ModelViewSet):

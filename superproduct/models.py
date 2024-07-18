@@ -18,8 +18,12 @@ class SuperProduct(models.Model):
     Image = models.FileField(upload_to='static/images/',null=True, blank=True)
     Description = models.CharField(max_length=1500)
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
-    Super_Product = models.ForeignKey(SubSuperProduct,on_delete=models.CASCADE)
-
+    Super_Product = models.ManyToManyField(
+        SubSuperProduct ,
+        related_name='SubSuper_Product',
+        blank=True,
+        help_text='Specific sub for this super menu.',
+        verbose_name='subsuperproduct')
     def __str__(self):
         return self.Title
 
