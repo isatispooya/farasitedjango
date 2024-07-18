@@ -265,25 +265,30 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "grouping" is required.')
         
         # grouping_instances = models.Grouping.objects.all()
-        grouping_instances = models.Grouping.objects.filter(Title__icontains=grouping )
+        try:
+            Domain_obj = models.Domain.objects.get(domain=Domain)
+        except:
+            raise serializers.ValidationError('دامنه یافت نشد')
+        try:
+            grouping_obj = models.Grouping.objects.get(id=grouping)
+        except:
+            raise serializers.ValidationError('گروه یافت نشد')
+
+
+
         
-        print(grouping_instances)
-        if not grouping_instances.exists():
-            raise serializers.ValidationError('Grouping with specified title does not exist.')
-        
-        # Use first() to get the first instance if there are multiple instances
-        grouping_instance = grouping_instances.filter(Domain = Domain)
-        # print(f"grouping_instance: {grouping_instance}")
-        
-        filtered_objects = self.get_queryset().filter(Domain=Domain, Grouping=grouping_instance.id ,show=True)      
+        filtered_objects = self.get_queryset().filter(Domain=Domain_obj, Grouping=grouping_obj ,show=True)      
         if not filtered_objects.exists():
             raise serializers.ValidationError('هیچ داده‌ای با این فیلترها یافت نشد.')        
         serializer = self.get_serializer(filtered_objects, many=True)
-        
+        print(serializer)
         for item in serializer.data: 
-            item['Grouping'] = grouping_instance.Title
+            item['Grouping_title'] = grouping_obj.Title
+        
         
         return response.Response(serializer.data)
+
+
 
 
         
