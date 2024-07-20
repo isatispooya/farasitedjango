@@ -1,4 +1,6 @@
 from django.contrib import admin
-from . import models
-admin.site.register(models.SubSuperProduct)
-admin.site.register(models.SuperProduct)
+from .models import SuperProduct, SubSuperProduct
+
+
+admin.site.register(SubSuperProduct)
+admin.site.register(SuperProduct)

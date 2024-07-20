@@ -1,17 +1,13 @@
 from rest_framework import serializers
-from . import models
+from .models import SuperProduct, SubSuperProduct
 
-class SubSuperProduct(serializers.ModelSerializer):
+class SubSuperProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.SubSuperProduct
-        fields = '__all__' 
+        model = SubSuperProduct
+        fields = '__all__'
 
+class SuperProductSerializer(serializers.ModelSerializer):
 
-class SuperProduct(serializers.ModelSerializer):
-    # sub = SubSuperProduct(many = True)
     class Meta:
-        model = models.SuperProduct
-        fields = '__all__' 
-  
-
-
+        model = SuperProduct
+        fields = '__all__'
