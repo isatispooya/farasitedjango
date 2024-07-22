@@ -9,6 +9,7 @@ urlpatterns = [
     path('',include('superproduct.urls')),
     path('',include('structure.urls')),
     path('',include('website.urls')),
+    path('',include('introduction.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
