@@ -76,7 +76,8 @@ INSTALLED_APPS = [
     'django_summernote',
     'menu',
     'structure',
-    'superproduct'
+    'superproduct',
+    'introduction'
 ]
 
 REST_FRAMEWORK = {
