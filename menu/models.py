@@ -22,7 +22,7 @@ class SuperMenu(models.Model):
     domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     vector = models.ImageField (upload_to='static/images/', blank=True,null = True)
-    sub = models.ManyToManyField(SubSuperMenu,blank=True,null=True)
+    sub = models.ManyToManyField(SubSuperMenu,blank=True)
     TYPE_CHOICES = (
         ('کشویی', 'dropdown'),
         ('لینک', 'link'),
