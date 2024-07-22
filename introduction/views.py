@@ -41,7 +41,10 @@ class IntroListViewset(viewsets.ModelViewSet):
             raise serializers.ValidationError('Parameter "Domain" is required.')
         print(Domain)
 
-        filtered_objects = self.get_queryset().filter(domain=Domain)
+        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
+        print(filtered_objects)
+        
         serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
     
+

@@ -4,7 +4,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 from django.urls import path, include
 from website import views as viewsWbsite
 from rest_framework import routers
-from introduction.views import IntroBannerViewset
+from introduction.views import IntroBannerViewset, IntroListViewset
 from menu.views import SuperMenuViewSet
 from structure.views import Pop_UpViewset
 from superproduct.views import SuperProductViewSet
@@ -45,6 +45,7 @@ router.register(viewset=viewsWbsite.LiveViewSet ,prefix='live',basename='live')
 router.register(viewset=viewsWbsite.ProductNameViewSet ,prefix='productname',basename='productname')
 router.register(viewset=viewsWbsite.SocialResponsibilityViewSet ,prefix='SocialResponsibility',basename='SocialResponsibility')
 router.register(viewset=IntroBannerViewset ,prefix='introbanner',basename='introbanner')
+router.register(viewset=IntroListViewset,prefix='introlist',basename='introlist')
 router.register(viewset=SuperMenuViewSet ,prefix='supermenus',basename='supermenus')
 router.register(viewset=Pop_UpViewset, prefix='Pop_Up', basename='Pop_Up')
 router.register(viewset=SuperProductViewSet, prefix='superproduct', basename='superproduct')
