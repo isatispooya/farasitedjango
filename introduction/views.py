@@ -23,6 +23,7 @@ class IntroBannerViewset(viewsets.ModelViewSet):
 class IntrocardViewSet(viewsets.ModelViewSet):
     queryset = Introcard.objects.all()
     serializer_class = IntrocardSerializer
+    serializer_class = IntrocardSerializer
     def list(self, request):
         Domain = request.query_params.get('Domain')
         if Domain is None:
@@ -30,7 +31,6 @@ class IntrocardViewSet(viewsets.ModelViewSet):
         filtered_objects = self.get_queryset().filter(Domain=Domain)
         serializer = self.get_serializer(filtered_objects)
         return response.Response(serializer.data)
-
 
 class IntroListViewset(viewsets.ModelViewSet):
     queryset = IntroList.objects.all()
