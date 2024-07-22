@@ -7,4 +7,6 @@ admin.site.register(models.IntroList)
 admin.site.register(models.List)
 admin.site.register(models.Card)
 admin.site.register(models.Introcard)
+admin.site.register(models.Barchart)
+admin.site.register(models.Fund)
 
