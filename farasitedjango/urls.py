@@ -4,7 +4,8 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, Sp
 from django.urls import path, include
 from website import views as viewsWbsite
 from rest_framework import routers
-from introduction.views import IntroBannerViewset , IntrocardViewSet , IntroListViewset , BarchartViewset
+from introduction.views import IntroBannerViewset , IntrocardViewSet , IntroListViewset 
+from chart.views import  BarchartViewset
 from menu.views import SuperMenuViewSet
 from structure.views import Pop_UpViewset
 from superproduct.views import SuperProductViewSet

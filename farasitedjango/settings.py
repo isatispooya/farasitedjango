@@ -77,7 +77,8 @@ INSTALLED_APPS = [
     'menu',
     'structure',
     'superproduct',
-    'introduction'
+    'introduction',
+    'chart',
 ]
 
 REST_FRAMEWORK = {

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import IntroBanner, IntroList, List , Card , Introcard
+from .models import IntroBanner, IntroList, List ,Introcard 
 
 class IntroBannerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,16 +9,17 @@ class IntroBannerSerializer(serializers.ModelSerializer):
 class ListSerializer(serializers.ModelSerializer):
     class Meta:
         model = List
-        fields = '__all__'   
-        
-                   
+        fields = ['List']
+
 class IntroListSerializer(serializers.ModelSerializer):
-    list = ListSerializer(many = True)
+    List = serializers.SerializerMethodField()
+
     class Meta:
         model = IntroList
-        fields = '__all__'        
+        fields = ['id', 'Title', 'Domain', 'List']
 
-
+    def get_List(self, obj):
+        return [list_item.List for list_item in obj.List.all()]
 
 
 class IntrocardSerializer(serializers.ModelSerializer):
@@ -29,3 +30,7 @@ class IntrocardSerializer(serializers.ModelSerializer):
         fields = ['id', 'Title', 'Domain', 'Card']
     def get_Card(self, obj):
         return [card.Card for card in obj.Card.all()]
+    
+
+
+
