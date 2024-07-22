@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import IntroBanner,IntroList,List, Introcard
-from .serializers import  IntroBannerSerializer, IntroListSerializer, ListSerializer
+from .models import IntroBanner,IntroList,List, Introcard ,  Card
+from .serializers import  IntroBannerSerializer, IntroListSerializer, ListSerializer , IntrocardSerializer ,CardSerializer
 from rest_framework import serializers
 from rest_framework import response
 
@@ -22,12 +22,14 @@ class IntroBannerViewset(viewsets.ModelViewSet):
 
 class IntrocardViewSet(viewsets.ModelViewSet):
     queryset = Introcard.objects.all()
-    serializer_class = serializers.Introcard
+    serializer_class = IntrocardSerializer
     def list(self, request):
         Domain = request.query_params.get('Domain')
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
-        filtered_objects = self.get_queryset().filter(Domain=Domain)
-        serializer = self.get_serializer(filtered_objects)
-        return response.Response(serializer.data)
+        filtered_objects = self.get_queryset().filter(Domain__domain=Domain)
+        serializer = self.get_serializer(filtered_objects, many=True)
+        serializer = serializer.data
+
+        return response.Response(serializer)
     

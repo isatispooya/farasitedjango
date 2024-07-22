@@ -27,7 +27,6 @@ class CardSerializer(serializers.ModelSerializer):
 
 
 class IntrocardSerializer(serializers.ModelSerializer):
-    card = CardSerializer(many = True)
     class Meta:
         model = Introcard
         fields = '__all__'              
