@@ -19,3 +19,4 @@ class SuperMenuViewSet(viewsets.ReadOnlyModelViewSet):
         filtered_objects = self.get_queryset().filter(domain=Domain)
         serializer = self.get_serializer(filtered_objects, many=True)
         return response.Response(serializer.data)
+    
