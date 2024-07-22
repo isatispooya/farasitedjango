@@ -30,7 +30,7 @@ class Introcard (models.Model) :
 class IntroBanner(models.Model):
     Title = models.CharField(max_length=500)
     Discription = models.CharField(max_length=500)
-    Domain = models.CharField(max_length=64, unique=True)
+    Domain = models.ForeignKey(Domain ,to_field='domain' ,on_delete=models.CASCADE)
 
     def __str__(self) :
         return f'{self.Title}'
