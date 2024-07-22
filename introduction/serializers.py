@@ -20,13 +20,12 @@ class IntroListSerializer(serializers.ModelSerializer):
 
 
 
-class CardSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Card
-        fields = '__all__'              
-
 
 class IntrocardSerializer(serializers.ModelSerializer):
+    Card = serializers.SerializerMethodField()
+
     class Meta:
         model = Introcard
-        fields = '__all__'              
+        fields = ['id', 'Title', 'Domain', 'Card']
+    def get_Card(self, obj):
+        return [card.Card for card in obj.Card.all()]
