@@ -9,7 +9,7 @@ class ContentDrop(models.Model):
 
 
     def __str__(self) :
-        return f'{self.Title()}'
+        return self.Title
     
 
 class TabVision (models.Model) :
@@ -20,7 +20,8 @@ class TabVision (models.Model) :
     ContentDrop,
     related_name= 'content_drop', 
     blank=True, help_text= 'Specific content for tab vision.', 
-    verbose_name = 'summernot for content' )
+    verbose_name = 'summernot for content'  , 
+    null=True)
 
     def __str__(self):
-        return f'{self.Title()}'
+        return self.Title
