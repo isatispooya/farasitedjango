@@ -7,6 +7,7 @@ class ContentDrop(models.Model):
     Summer = SummernoteTextField()
 
 
+
     def __str__(self) :
         return f'{self.Title()}'
     
