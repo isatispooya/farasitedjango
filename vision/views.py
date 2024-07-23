@@ -21,7 +21,7 @@ class TabvisionViewset(viewsets.ModelViewSet):
         return response.Response(serializer.data)
     
 
-
+# Types of Consulation
 class ConsulationViewset(viewsets.ModelViewSet):
     queryset = models.Consulation.objects.all()
     serializer_class = serializers.ConsulationSerializer
