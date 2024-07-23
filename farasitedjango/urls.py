@@ -9,6 +9,9 @@ from chart.views import  BarchartViewset
 from menu.views import SuperMenuViewSet
 from structure.views import Pop_UpViewset
 from superproduct.views import SuperProductViewSet
+from vision.views import TabvisionViewset
+
+
 
 router = routers.DefaultRouter()
 router.register(viewset=viewsWbsite.InformationViewSet, prefix='information', basename='information')
@@ -49,6 +52,7 @@ router.register(viewset=IntroBannerViewset ,prefix='introbanner',basename='intro
 router.register(viewset=IntrocardViewSet ,prefix='introcard',basename='introcard')
 router.register(viewset=IntroListViewset,prefix='introlist',basename='introlist')
 router.register(viewset=BarchartViewset,prefix='barchart',basename='barchart')
+router.register(viewset=TabvisionViewset,prefix='tabvision',basename='tabvision')
 router.register(viewset=SuperMenuViewSet ,prefix='supermenus',basename='supermenus')
 router.register(viewset=Pop_UpViewset, prefix='Pop_Up', basename='Pop_Up')
 router.register(viewset=SuperProductViewSet, prefix='superproduct', basename='superproduct')
