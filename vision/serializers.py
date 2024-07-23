@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ContentDrop , TabVision
+from .models import ContentDrop , TabVision ,Consulation
 
 class ContentDropSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,3 +12,9 @@ class TabvisionSerializer(serializers.ModelSerializer):
     class Meta:
         model = TabVision
         fields = ['Title' , 'Summer' , 'Contentdrop' , 'Domain']
+
+
+class ConsulationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Consulation
+        fields = '__all__'

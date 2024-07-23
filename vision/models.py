@@ -25,3 +25,16 @@ class TabVision (models.Model) :
 
     def __str__(self):
         return self.Title
+    
+
+class Consulation(models.Model):
+    Title = models.CharField(max_length=200)
+    Discription = models.CharField(max_length=500)
+    Photo = models.ImageField (upload_to='static/images/', blank=True, null=True)
+    Domain = models.ForeignKey (Domain , to_field='domain' , on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Title
+        
+
+
