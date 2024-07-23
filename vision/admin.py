@@ -1,4 +1,4 @@
 from django.contrib import admin
 from . import models 
 
-admin.site.register(models.ContextDrop)
+admin.site.register(models.ContentDrop)
