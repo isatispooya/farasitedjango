@@ -5,4 +5,5 @@ class ContextDropSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContextDrop
         fields = '__all__'
+
         
