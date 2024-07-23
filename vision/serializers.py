@@ -1,9 +1,8 @@
 from rest_framework import serializers
-from .models import ContextDrop
+from .models import ContentDrop
 
-class ContextDropSerializer(serializers.ModelSerializer):
+class ContentDropSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ContextDrop
+        model = ContentDrop
         fields = '__all__'
 
-        
