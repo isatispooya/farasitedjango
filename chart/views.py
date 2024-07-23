@@ -20,3 +20,7 @@ class BarchartViewset (viewsets.ModelViewSet) :
         return response.Response(serializer)
 
 
+
+
+
+
