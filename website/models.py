@@ -60,6 +60,8 @@ class Information (models.Model) :
         return str(self.Domain)
     
 
+
+
 # Branchs
 class BranchsOfCompany (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
