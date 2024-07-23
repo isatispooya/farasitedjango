@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'superproduct',
     'introduction',
     'chart',
+    'vision',
 ]
 
 REST_FRAMEWORK = {
