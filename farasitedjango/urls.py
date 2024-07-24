@@ -64,9 +64,6 @@ router.register(viewset=SuperProductViewSet, prefix='superproduct', basename='su
 
 
 
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
