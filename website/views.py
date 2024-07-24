@@ -7,6 +7,11 @@ import datetime
 import pandas as pd
 from random import sample , randint
 from django.shortcuts import get_object_or_404
+import requests
+from structure.models import TelegramBot
+from django.utils import timezone
+
+
 
 # Information 
 class InformationViewSet(viewsets.ModelViewSet):
@@ -413,6 +418,8 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
     
 
 # Subscription  
+
+
 class SubscriptionViewSet(viewsets.ModelViewSet):
     queryset = models.Subscription.objects.all()
     serializer_class = serializer.Subscription
@@ -420,7 +427,8 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         Domain = request.data.get('Domain')
         Telephone = request.data.get('Telephone')
         Subject = request.data.get('Subject')
-        CreateAt = datetime.datetime.now()
+        Name = request.data.get('Name')
+        CreateAt = timezone.now()
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
         Doimain_instances = models.Domain.objects.filter(domain=Domain)
@@ -428,8 +436,31 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         if not Doimain_instances.exists():
             raise serializers.ValidationError('Domain with specified title does not exist.')
         subscription = models.Subscription(Domain=domain_instance, Telephone=Telephone, Subject=Subject, CreateAt=CreateAt)
+
         subscription.save()
-        return response.Response({"success": True})
+        telegram = TelegramBot.objects.all()
+        message = f"درخواست جدید:\n👤 نام: {Name}\n☎️ تلفن: {Telephone}\n🌐 وبسایت: {Domain}\n🖇️ موضوع: {Subject}\n📆 تاریخ: {CreateAt}"
+        payload = {
+            'message': message
+        }
+        
+        try:
+            url = telegram.first().Ip
+            chat_id1 = telegram.first().CHAT_ID1
+            chat_id2 = telegram.first().CHAT_ID2
+            chat_id3 = telegram.first().CHAT_ID3
+            chat_id4 = telegram.first().CHAT_ID4
+            for i in [chat_id1, chat_id2, chat_id3, chat_id4]:
+                if len(i)>3:
+                    payload['chat_id'] = i
+                    flask_response = requests.post(url, json=payload)
+                    flask_response_data = flask_response.json()
+                    if flask_response.status_code != 200 or 'error' in flask_response_data:
+                        return response.Response({"success": True, "telegram": "Failed to send message to Telegram"}, status=201)
+        except Exception as e:
+            return response.Response({"success": True, "telegram": f"Exception: {str(e)}"}, status=201)
+        
+        return response.Response({"success": True, "telegram": "Message sent to Telegram"}, status=201)
 
     
 # Slider

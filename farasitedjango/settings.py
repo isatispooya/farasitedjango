@@ -210,3 +210,8 @@ SUMMERNOTE_CONFIG = {
         ['help', ['help']],
     ],
 }
+
+
+
+USE_TZ = True  
+TIME_ZONE = 'UTC'
