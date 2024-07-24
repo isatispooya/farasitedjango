@@ -12,6 +12,7 @@ from superproduct.views import SuperProductViewSet
 from vision.views import TabvisionViewset
 from vision.views import ConsulationViewset
 from brief.views import BriefViewSet
+from bourse.views import SectionViewSet
 
 
 router = routers.DefaultRouter()
@@ -55,6 +56,7 @@ router.register(viewset=IntroListViewset,prefix='introlist',basename='introlist'
 router.register(viewset=BarchartViewset,prefix='barchart',basename='barchart')
 router.register(viewset=TabvisionViewset,prefix='tabvision',basename='tabvision') 
 router.register(viewset=BriefViewSet,prefix='brief',basename='brief') 
+router.register(viewset=SectionViewSet,prefix='bourse',basename='bourse') 
 router.register(viewset=ConsulationViewset,prefix='consulation',basename='consulation')
 router.register(viewset=SuperMenuViewSet ,prefix='supermenus',basename='supermenus')
 router.register(viewset=Pop_UpViewset, prefix='Pop_Up', basename='Pop_Up')
