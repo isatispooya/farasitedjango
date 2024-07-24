@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'introduction',
     'chart',
     'vision',
+    'brief',
 ]
 
 REST_FRAMEWORK = {
