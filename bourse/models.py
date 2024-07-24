@@ -12,6 +12,6 @@ class Content(models.Model):
         Introduction ,
         related_name='i_introduction',
         blank=True,
-        help_text='Specific name for introduction.',
+        help_text='Specific introduction for content.',
         verbose_name='introduction')
 
