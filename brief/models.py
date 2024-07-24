@@ -54,4 +54,7 @@ class Brief(models.Model):
         help_text='Specific Title for number.',
         verbose_name='number')
     
+    def __str__(self) :
+        return f'{self.Title}'  
+
 
