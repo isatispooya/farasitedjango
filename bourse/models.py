@@ -11,7 +11,7 @@ class Card(models.Model):
 class Introduction(models.Model):
    Title = models.CharField(max_length=200)
    Description = models.CharField(max_length=2000) 
-   Photo = models.ImageField(upload_to='static/images/')
+   Photo = models.ImageField(upload_to='static/images/' ,  null= True ,  blank= True)
 
    def __str__(self) :
         return f'{self.Title}'
