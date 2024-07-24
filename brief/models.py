@@ -37,7 +37,7 @@ class Brief(models.Model):
         List ,
         related_name='l_list',
         blank=True,
-        help_text='Specific Card for list.',
+        help_text='Specific Title for list.',
         verbose_name='list')
     
     Card = models.ManyToManyField(
@@ -51,7 +51,10 @@ class Brief(models.Model):
         Number ,
         related_name='n_number',
         blank=True,
-        help_text='Specific Card for number.',
+        help_text='Specific Title for number.',
         verbose_name='number')
     
+    def __str__(self) :
+        return f'{self.Title}'  
+
 
