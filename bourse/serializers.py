@@ -5,7 +5,7 @@ from .models import Content, Introduction, Card, Sections
 class IntroductionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Introduction
-        fields = ['Title', 'Description']
+        fields = '__all__'
 
 
 
@@ -13,17 +13,17 @@ class ContentSerializer(serializers.ModelSerializer):
     Introduction = IntroductionSerializer (many = True)
     class Meta:
         model = Content
-        fields = ['Name', 'Introduction']
+        fields = '__all__'
 
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
-        fields = ['Title', 'Description']
+        fields = '__all__'
 
 class SectionsSerializer(serializers.ModelSerializer):
     Card = CardSerializer(many = True)
     Content = ContentSerializer(many = True)
     class Meta:
         model = Sections
-        fields = ['Title', 'Content', 'Card', 'Domain']
+        fields = '__all__'
         
