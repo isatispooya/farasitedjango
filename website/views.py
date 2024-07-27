@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework import viewsets
 from rest_framework import response
+from rest_framework.response import Response
 from rest_framework import status
 from . import models
 from . import serializer
@@ -425,8 +426,8 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
     queryset = models.Subscription.objects.all()
     serializer_class = serializer.Subscription
 
-    def list(self,request,*args, **kwargs):
-        return response([], status = status.HTTP_200_OK)
+    def list(self, request,*args, **kwargs):
+        return Response([], status = status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         Domain = request.data.get('Domain')
