@@ -437,11 +437,11 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         CreateAt = request.data.get('CreateAt')
 
         if Subject is None:
-            Subject = ('نامشخص')
+            Subject = ('Subject is unknown')
         
 
         if Name is None:
-            Name = ('نامشخص')
+            Name = ('Name is unknown')
         
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
