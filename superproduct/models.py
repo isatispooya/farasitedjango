@@ -17,6 +17,7 @@ class SuperProduct(models.Model):
     Title = models.CharField(max_length=255)
     Image = models.FileField(upload_to='static/images/',null=True, blank=True)
     Description = models.CharField(max_length=1500)
+    
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     Super_Product = models.ManyToManyField(
         SubSuperProduct ,

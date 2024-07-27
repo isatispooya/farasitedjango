@@ -274,7 +274,6 @@ class NewsWithGroupingViewSet(viewsets.ModelViewSet):
         if grouping is None:
             raise serializers.ValidationError('Parameter "grouping" is required.')
         
-        # grouping_instances = models.Grouping.objects.all()
         try:
             Domain_obj = models.Domain.objects.get(domain=Domain)
         except:
