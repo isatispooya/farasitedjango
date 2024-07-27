@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework import viewsets
 from rest_framework import response
+from rest_framework import status
 from . import models
 from . import serializer
 import datetime
@@ -423,12 +424,23 @@ class SubjectSubscriptionViewSet(viewsets.ModelViewSet):
 class SubscriptionViewSet(viewsets.ModelViewSet):
     queryset = models.Subscription.objects.all()
     serializer_class = serializer.Subscription
+
+    def list(self,request,*args, **kwargs):
+        return response([], status = status.HTTP_200_OK)
+
     def create(self, request, *args, **kwargs):
         Domain = request.data.get('Domain')
         Telephone = request.data.get('Telephone')
         Subject = request.data.get('Subject')
         Name = request.data.get('Name')
-        CreateAt = timezone.now()
+        
+        if Subject is None:
+            Subject = ('نامشخص')
+        
+
+        if Name is None:
+            Name = ('نامشخص')
+        
         if Domain is None:
             raise serializers.ValidationError('Parameter "Domain" is required.')
         Doimain_instances = models.Domain.objects.filter(domain=Domain)
