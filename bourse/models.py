@@ -4,6 +4,7 @@ from django.db import models
 class Card(models.Model):
    Title = models.CharField(max_length=200)
    Description = models.CharField(max_length=2000) 
+   photo  =models.ImageField(upload_to= 'static/images/', null=True , blank= True)
 
    def __str__(self) :
         return f'{self.Title}'
