@@ -15,6 +15,7 @@ class SubSuperMenu(models.Model):
     )
     type = models.CharField(max_length=12, choices=TYPE_CHOICES)
     description = models.CharField(max_length=300,blank=True,null=True)
+    Sort = models.IntegerField()
     def __str__(self) -> str:
         return f'{self.title} {self.url}'
 
