@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from colorfield.fields import ColorField
 from django.utils.timezone import now
 from django_summernote.fields import SummernoteTextField
+from tinymce.models import HTMLField
 
 
 class Domain(models.Model):
@@ -284,7 +285,7 @@ class Grouping (models.Model) :
 class News (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
-    Content = SummernoteTextField()
+    Content = HTMLField()
     KeyWord = models.CharField (max_length=500)
     Grouping = models.ForeignKey(Grouping, on_delete=models.CASCADE)
     Title = models.CharField (max_length=500)

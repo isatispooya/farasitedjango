@@ -81,7 +81,8 @@ INSTALLED_APPS = [
     'chart',
     'vision',
     'brief',
-    'bourse'
+    'bourse',
+    'tinymce'
 ]
 
 REST_FRAMEWORK = {
@@ -209,6 +210,19 @@ SUMMERNOTE_CONFIG = {
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']],
     ],
+}
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'menubar': 'file edit view insert format tools table help',
+    'plugins': 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
+    'toolbar': 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image | code',
+    'image_uploadtab': True,
+    'image_title': True,
+    'automatic_uploads': True,
+    'file_picker_types': 'image',
+    'images_upload_url': '/upload_image/',  # آدرس URL برای آپلود تصاویر
+    'images_upload_base_path': '/images/',
 }
 
 
