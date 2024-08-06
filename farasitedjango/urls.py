@@ -13,6 +13,9 @@ from vision.views import TabvisionViewset
 from vision.views import ConsulationViewset
 from brief.views import BriefViewSet
 from bourse.views import SectionViewSet
+from filebrowser.sites import site
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 router = routers.DefaultRouter()
@@ -72,4 +75,4 @@ urlpatterns = [
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('tinymce/', include('tinymce.urls')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

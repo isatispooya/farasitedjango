@@ -306,7 +306,7 @@ class News (models.Model) :
 class SocialResponsibility (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
-    Content = SummernoteTextField()
+    Content = HTMLField()
     Title = models.CharField (max_length=500)
     Picture = models.ImageField (upload_to='static/images/', blank=True, null=True)
     class Meta:
@@ -321,7 +321,7 @@ class Products (models.Model) :
     Domain = models.ForeignKey(Domain, to_field='domain', on_delete=models.CASCADE)
     CreateAt = models.DateTimeField (default=now)
     Picture =models.ImageField (upload_to='static/images/')
-    Paragraph = SummernoteTextField()
+    Paragraph = HTMLField()
     Title = models.CharField (max_length=255)
     route = models.CharField (max_length=255)
     AdditionalImages = models.ImageField (upload_to='static/images/',blank=True, null=True)

@@ -1,11 +1,12 @@
 from django.db import models
 from django_summernote.fields import SummernoteTextField
 from website.models import Domain 
+from tinymce.models import HTMLField
+
 
 class ContentDrop(models.Model):
     Title = models.CharField(max_length=500)
-    Summer = SummernoteTextField()
-
+    Summer = HTMLField()
 
 
     def __str__(self) :
@@ -14,14 +15,14 @@ class ContentDrop(models.Model):
 
 class TabVision (models.Model) :
     Title = models.CharField(max_length=200)
-    Summer = SummernoteTextField()
+    Summer = HTMLField()
     Domain = models.ForeignKey (Domain , to_field='domain' , on_delete=models.CASCADE)
     Contentdrop = models.ManyToManyField (    
     ContentDrop,
     related_name= 'content_drop', 
     blank=True, help_text= 'Specific content for tab vision.', 
     verbose_name = 'summernot for content'  , 
-    null=True)
+    )
 
     def __str__(self):
         return self.Title
