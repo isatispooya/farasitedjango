@@ -4,3 +4,6 @@ static/images/*
 menu/migrations/0002_supermenu_type_supermenu_url_alter_supermenu_sub.py
 website/migrations/0003_alter_live_domain.py
 */migrations/*
+django-summernote/*
+media/*
+staticfiles/*
