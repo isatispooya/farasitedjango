@@ -433,7 +433,10 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         Telephone = request.data.get('Telephone')
         Subject = request.data.get('Subject')
         Name = request.data.get('Name')
-        CreateAt = request.data.get('CreateAt')
+        try :
+            CreateAt = request.data.get('CreateAt')
+        except :
+            CreateAt = datetime.datetime.now()
 
         if Subject is None:
             Subject = ('Subject is unknown')
@@ -448,11 +451,11 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
         domain_instance = Doimain_instances.first()
         if not Doimain_instances.exists():
             raise serializers.ValidationError('Domain with specified title does not exist.')
-        subscription = models.Subscription(Domain=domain_instance, Telephone=Telephone, Subject=Subject, CreateAt=CreateAt)
+        subscription = models.Subscription(Domain=domain_instance, Telephone=Telephone, Subject=Subject)
 
         subscription.save()
         telegram = TelegramBot.objects.all()
-        message = f"درخواست جدید:\n👤 نام: {Name}\n☎️ تلفن: {Telephone}\n🌐 وبسایت: {Domain}\n🖇️ موضوع: {Subject}\n📆 تاریخ: {CreateAt}"
+        message = f"درخواست جدید:\n👤 نام: {Name}\n☎️ تلفن: {Telephone}\n🌐 وبسایت: {Domain}\n🖇️ موضوع: {Subject}"
         payload = {
             'message': message
         }
