@@ -17,6 +17,9 @@ from supercart.views import SuperCartViewSet,RoadmapViewSet
 from filebrowser.sites import site
 from django.conf.urls.static import static
 from django.conf import settings
+from education.views import TrainingCourseViewSet
+
+
 
 
 router = routers.DefaultRouter()
@@ -67,6 +70,7 @@ router.register(viewset=Pop_UpViewset, prefix='Pop_Up', basename='Pop_Up')
 router.register(viewset=SuperProductViewSet, prefix='superproduct', basename='superproduct')
 router.register(viewset=RoadmapViewSet, prefix='roadmap', basename='roadmap')
 router.register(viewset=SuperCartViewSet, prefix='supercart', basename='supercart')
+router.register(viewset=TrainingCourseViewSet, prefix='training', basename='training')
 
 
 

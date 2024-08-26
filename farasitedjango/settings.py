@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'bourse',
     'supercart',
     'tinymce',
+    'education',
 ]
 
 REST_FRAMEWORK = {
