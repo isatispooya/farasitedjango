@@ -14,7 +14,6 @@ from vision.views import ConsulationViewset
 from brief.views import BriefViewSet
 from bourse.views import SectionViewSet
 from supercart.views import SuperCartViewSet,RoadmapViewSet
-from filebrowser.sites import site
 from django.conf.urls.static import static
 from django.conf import settings
 from education.views import TrainingCourseViewSet
