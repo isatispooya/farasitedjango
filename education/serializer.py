@@ -7,7 +7,7 @@ class TrainingCourse (serializers.ModelSerializer) :
     jalali_date = serializers.SerializerMethodField()
     class Meta:
         model = models.TrainingCourse
-        fields = ['Domain', 'Title', 'CreateAt', 'Date', 'Description', 'Duration', 'Teacher', 'Kind' , 'jalali_date']
+        fields = "__all__"
        
 
 

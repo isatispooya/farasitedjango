@@ -16,6 +16,8 @@ class TrainingCourse (models.Model) :
         ('in person' , 'in person'),
     ]
     Kind = models.CharField(max_length=10, choices=Kind_Option, default='in person')    
+    photo = models.ImageField(upload_to='static/images/')
+    completed = models.BooleanField(default=False)
     def __str__(self):
         return str(self.Domain)+ '[' +self.Title+']'
     
