@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from django.urls import path, include
+from blog.views import BlogViewSet
 from website import views as viewsWbsite
 from rest_framework import routers
 from introduction.views import IntroBannerViewset , IntrocardViewSet , IntroListViewset 
@@ -70,6 +71,7 @@ router.register(viewset=SuperProductViewSet, prefix='superproduct', basename='su
 router.register(viewset=RoadmapViewSet, prefix='roadmap', basename='roadmap')
 router.register(viewset=SuperCartViewSet, prefix='supercart', basename='supercart')
 router.register(viewset=TrainingCourseViewSet, prefix='training', basename='training')
+router.register(viewset=BlogViewSet, prefix='blog', basename='blog')
 
 
 
