@@ -50,6 +50,7 @@ class Information (models.Model) :
     Description = models.CharField (max_length=500 , blank=True, null=True)
     Keywords = models.CharField (max_length=500 ,blank=True, null=True)
     Enemad = models.CharField (max_length=2000 ,blank=True, null=True)
+    Farabours = models.CharField (max_length=2000 ,blank=True, null=True)
     Admin = models.CharField (max_length=255)
     Date = models.CharField (max_length=255)
     FieldOfActivity = models.CharField (max_length=255)
