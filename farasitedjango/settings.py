@@ -10,13 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+import environ
 
 from pathlib import Path
 
-
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u69^8*1=n6o3f*^hj_blrt_*0846r#n-mix332zdtn9#$&8qa3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 
 CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
@@ -35,13 +38,7 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://farasite.fidip.ir',
-    'https://fid.isatispooya.com',
-    'https://insurce.isatispooya.com',
-    'https://ipmill.isatispooya.com',
-    'https://pardisan.isatispooya.com',
-]
+
 
 
 ALLOWED_HOSTS = ['*',
@@ -136,8 +133,12 @@ WSGI_APPLICATION = 'farasitedjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -178,7 +179,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    os.path.join(BASE_DIR, "static")
+
 ]
 
 STATIC_URL = '/static/'
@@ -192,10 +194,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST="smtp.c1.liara.email"
-EMAIL_PORT=587
-EMAIL_HOST_USER="brave_kare_ko005v"
-EMAIL_HOST_PASSWORD="1a0e0e18-7e1e-476f-8920-239dbcbb96c1"
+EMAIL_HOST=env('EMAIL_HOST')
+EMAIL_PORT=env('EMAIL_PORT')
+EMAIL_HOST_USER=env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS=True
 
 
@@ -215,20 +217,6 @@ SUMMERNOTE_CONFIG = {
         ['help', ['help']],
     ],
 }
-
-# TINYMCE_DEFAULT_CONFIG = {
-#     'height': 360,
-#     'menubar': 'file edit view insert format tools table help',
-#     'plugins': 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
-#     'toolbar': 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image | code',
-#     'image_uploadtab': True,
-#     'image_title': True,
-#     'automatic_uploads': True,
-#     'file_picker_types': 'image',
-#     'images_upload_url': '/upload_image/',  # آدرس URL برای آپلود تصاویر
-#     'images_upload_base_path': '/images/',
-# }
-
 
 
 TINYMCE_DEFAULT_CONFIG = {
