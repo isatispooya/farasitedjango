@@ -15,3 +15,4 @@ persiantools
 djangorestframework-simplejwt
 PyJWT
 whitenoise
+mkdocs-material
