@@ -139,24 +139,37 @@ For detailed info on architecture, custom app setup, or domain-specific configur
 
 ## Project Structure 📂
 farasite/
-├── apps/                # Main Django apps
-│   ├── website/         # Core website functionality (main content)
-│   ├── menu/            # Manages dynamic menus for websites
-│   ├── structure/       # Handles website structural settings (layout, sections)
-│   ├── superproduct/    # Manages special product listings per domain
-│   ├── introduction/    # Introduction pages or sections per domain
-│   ├── chart/           # Handles chart-based data visualization
-│   ├── vision/          # Manages vision and mission statements
-│   ├── brief/           # Provides brief summaries for content
-│   ├── bourse/          # Stock market/bourse data module
-│   ├── tinymce/         # Rich text editor integration
-│   ├── education/       # Education-related content (articles, courses, etc.)
-│   ├── blog/            # Blogging system for multiple domains
-├── config/              # Django settings & configurations
-├── static/              # Static files (CSS, JS, images)
-├── templates/           # HTML templates for rendering views
-├── docs/                # Project documentation
-└── manage.py            # Django management script
+├── apps/                     # Main Django apps
+│   ├── website/              # Core website functionality (main content)
+│   ├── menu/                 # Manages dynamic menus for websites
+│   ├── structure/            # Handles website structural settings (layout, sections)
+│   ├── superproduct/         # Manages special product listings per domain
+│   ├── introduction/         # Introduction pages or sections per domain
+│   ├── chart/                # Handles chart-based data visualization
+│   ├── vision/               # Manages vision and mission statements
+│   ├── brief/                # Provides brief summaries for content
+│   ├── bourse/               # Stock market/bourse data module
+│   ├── supercart/            # Shopping cart management
+│   ├── education/            # Education-related content (articles, courses, etc.)
+│   ├── blog/                 # Blogging system for multiple domains
+├── config/                   # Django settings & configurations
+├── static/                   # Static files (CSS, JS, images)
+├── staticfiles/              # Collected static files (for production)
+├── media/                    # Uploaded media files
+├── docs/                     # Project documentation
+├── logs/                     # Logs for debugging & monitoring
+├── templates/                # HTML templates for rendering views
+├── manage.py                 # Django management script
+├── README.md                 # Project documentation & setup guide
+├── requirements.txt          # Dependencies & Python packages
+├── nginx.conf                # Nginx configuration for serving static/media files
+├── docker-compose.yml        # Docker multi-container setup
+├── Dockerfile                # Docker image build configuration
+├── entrypoint.sh             # Script to start the application in Docker
+├── .env                      # Environment variables (DO NOT COMMIT!)
+├── .env.example              # Example environment file for reference
+├── .gitignore                # Files and directories to ignore in Git
+
 
 
 ## License
