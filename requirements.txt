@@ -8,4 +8,10 @@ drf-spectacular-sidecar
 django-colorfield
 django-summernote
 django-tinymce
-gunicorn 
+gunicorn
+pandas
+requests 
+persiantools
+djangorestframework-simplejwt
+PyJWT
+whitenoise
